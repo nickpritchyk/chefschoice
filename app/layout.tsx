@@ -1,8 +1,11 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { PT_Serif } from 'next/font/google'
 import Navbar from './components/Navbar'
 
-const inter = Inter({ subsets: ['latin'] })
+const PT = PT_Serif({
+  weight: '400',
+  subsets: ['latin'],
+})
 
 export const metadata = {
   title: 'Create Next App',
@@ -15,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className=''>
+    <html className={PT.className} lang="en">
+      <body>
         <Navbar />
         {children}
       </body>
