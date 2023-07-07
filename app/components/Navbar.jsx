@@ -16,6 +16,7 @@ function Navbar() {
           <ul className='hidden sm:flex gap-x-8 mr-16'>
             <Link className='hover:text-gray-600' href='/'> Recipes </Link>
             <Link className='hover:text-gray-600' href='/'> Favorites </Link>
+            <Link className='hover:text-gray-600' href='/book'> Recipe Book </Link>
             <Link className='hover:text-gray-600' href='/'> About </Link>
           </ul>
           <TableRowsIcon className='sm:hidden right-0 mx-8 hover:animate-pulse hover:text-gray-600 cursor-pointer' onClick={() => setIsOpen((prev) => (!prev))}> x </TableRowsIcon>
