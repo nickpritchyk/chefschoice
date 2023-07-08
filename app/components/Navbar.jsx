@@ -10,7 +10,7 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   
   return (
-    <div className='w-full h-20 border-b-2 fixed top-0 bg-white'>
+    <div className='w-full h-20 border-b-2 fixed top-0 bg-white z-20'>
         <nav className='flex h-full items-center ml-8 text-xl justify-between'>
           <Link className='left-3 text-3xl font-bold' href='/'> Home </Link>
           <ul className='hidden sm:flex gap-x-8 mr-16'>
@@ -27,6 +27,7 @@ function Navbar() {
               <CloseIcon className='sm:hidden gap-y-8 right-0 left-0 hover:animate-pulse hover:text-gray-600 cursor-pointer' onClick={() => setIsOpen(false)}> x </CloseIcon>
               <Link className='hover:text-gray-600' href='/'> Recipes </Link>
               <Link className='hover:text-gray-600' href='/'> Favorites </Link>
+              <Link className='hover:text-gray-600' href='/book'> Recipe Book </Link>
               <Link className='hover:text-gray-600' href='/'> About </Link>
             </ul>
           </nav>

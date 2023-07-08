@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import header1 from './assets/header1.png'
 import Autocomplete from '@mui/material/Autocomplete'
-import { TextField } from '@mui/material'
 import Searchbar from './components/Searchbar.jsx'
 
 export default function Home() {
