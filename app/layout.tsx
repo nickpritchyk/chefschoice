@@ -22,7 +22,6 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
-      <script src="./node_modules/preline/dist/preline.js"></script>
       </body>
     </html>
   )
