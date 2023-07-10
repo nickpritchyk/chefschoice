@@ -1,4 +1,5 @@
 import { request } from 'http'
+import { NextResponse } from 'next/server'
 
 const { PrismaClient } = require('@prisma/client')
 
@@ -18,5 +19,5 @@ export async function POST(req, res) {
     })
 
 
-    return new Response('OK')
+    return NextResponse.json({ message: 'Recipe Added' })
 }
