@@ -23,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/Context/store.jsx", "app/Context/store.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/Context/store.jsx", "app/Context/store.jsx", "app/api/main/route.js"],
   "exclude": ["node_modules"]
 }

@@ -1,6 +1,7 @@
 import './globals.css'
 import { PT_Serif } from 'next/font/google'
 import Navbar from './components/Navbar'
+import { StoreContextProvider } from './Context/store'
 
 const PT = PT_Serif({
   weight: '400',
@@ -20,8 +21,10 @@ export default function RootLayout({
   return (
     <html className={PT.className} lang="en">
       <body>
+        <StoreContextProvider>
+          {children}
+        </StoreContextProvider>
         <Navbar />
-        {children}
       </body>
     </html>
   )
