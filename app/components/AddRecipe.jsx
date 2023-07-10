@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react'
+import React, { useState, use } from 'react'
 import { Button } from '@chimera-ui/components'
 import { NextResponse } from 'next/server';
 
@@ -10,7 +10,20 @@ function AddRecipe() {
   const [instructions, setInstructions] = useState('')
 
   const sendRecipe = async (e) => {
-    // fetch dont work use SWR 
+    e.preventDefault();
+    fetch('/api/main', {
+      method: 'POST',
+      body: JSON.stringify({
+        title,
+        ingredients,
+        instructions,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+    }).then(res => {
+      console.log(res)
+    })
   }
 
 

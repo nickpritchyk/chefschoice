@@ -12,6 +12,6 @@ model recipebook {
   name         String @db.VarChar(45)
   description  String @db.VarChar(45)
   ingredients  String @db.VarChar(45)
-  cooktime     String @db.VarChar(45)
+  cooktime     Int
   instructions String @db.Text
 }
