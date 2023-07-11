@@ -2,6 +2,8 @@ import './globals.css'
 import { PT_Serif } from 'next/font/google'
 import Navbar from './components/Navbar'
 import { StoreContextProvider } from './Context/store'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const PT = PT_Serif({
   weight: '400',
@@ -25,6 +27,7 @@ export default function RootLayout({
           {children}
         </StoreContextProvider>
         <Navbar />
+        <ToastContainer />
       </body>
     </html>
   )
