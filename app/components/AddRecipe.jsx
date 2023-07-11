@@ -20,7 +20,7 @@ function AddRecipe() {
   const handleSuccess = () => {
     setSuccessIcon(true)
     setBookSection(false)
-    toast('Success!', { hideProgressBar: true, autoClose: 2000, type: 'success' })
+    toast('Recipe Added', { hideProgressBar: true, autoClose: 3000, type: 'success' })
   }
 
   const sendRecipe = async (e) => {
@@ -42,24 +42,24 @@ function AddRecipe() {
       handleSuccess()
       })
     }
-  
-
+    
   return (
-    <div className="flex flex-col w-full items-center mt-4 bg-[url('./assets/food.png')]">
+    <div className="flex flex-col w-full items-center mt-4">
       <h1 className='text-2xl font-bold'> Add Recipe </h1>
       <form className='bg-white h-max flex m-12 flex-col space-y-6 border-[1.5px] border-black md:p-24 rounded-lg'>
         <label> Recipe Title</label>
-        <input className='border-[1px] border-black rounded-md p-1 shadow-xl' placeholder='Title' onChange={(e) => setTitle(e.target.value)}></input>
+        <input className='border-[1px] border-black rounded-md p-1 shadow-xl' placeholder='Title' onChan ge={(e) => setTitle(e.target.value)}></input>
         <label> Ingredients </label>
         <input className='border-[1px] border-black rounded-md p-1 shadow-xl' placeholder='Ingredients' onChange={(e) => setIngredients(e.target.value)}></input>
         <label> Instructions </label>
-        <input className='border-[1px] border-black rounded-md p-1 shadow-xl' placeholder='Instructions' onChange={(e) => setInstructions(e.target.value)}></input>
-        <Button className='mx-auto' onClick={sendRecipe}> Submit Recipe </Button>
-        {isLoading && 
-        <div className='m-auto'>
-          <Bounce />
-        </div>
+        <input className='border-[1px] border-black rounded-md p-1 shadow-xl' placeholder='Instructions' onChange={(e) => setInstructions(e.target.value)}></input> 
+        <div className='flex mx-auto h-full'>
+        {!isLoading &&
+          <Button className='h-[2rem]' onClick={sendRecipe}> Submit Recipe </Button>
+        }{isLoading && 
+          <Bounce className='h-[2rem]' />
         }
+        </div>
       </form>
     </div>
   )
