@@ -11,7 +11,7 @@ model recipebook {
   id           Int    @id @default(autoincrement())
   name         String @db.VarChar(45)
   description  String @db.VarChar(45)
-  ingredients  String @db.VarChar(45)
+  ingredients  Json
   cooktime     Int
-  instructions String @db.Text
+  instructions String @db.MediumText
 }

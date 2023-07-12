@@ -11,9 +11,9 @@ export async function POST(req, res) {
     const user = await prisma.recipebook.create({
         data: {
             name: data.title,
-            description: 'stuff',
-            ingredients: data.ingredients,
-            cooktime: 3,
+            description: data.description,
+            ingredients: data.ingredientsJSON,
+            cooktime: parseInt(data.cookTime),
             instructions: data.instructions,
         }
     })

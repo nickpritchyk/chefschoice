@@ -10,7 +10,7 @@ function page() {
   const { bookSection } = useStoreContext();
 
   return (
-    <div className='flex h-full w-full items-center flex-col top-0'>
+    <div className='flex items-center flex-col'>
         <ButtonGroup></ButtonGroup>
         {bookSection && 
           <AddRecipe></AddRecipe>
