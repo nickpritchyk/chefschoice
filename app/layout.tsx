@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html className={PT.className} lang="en">
-      <body>
+      <body className=''>
         <StoreContextProvider>
           {children}
         </StoreContextProvider>

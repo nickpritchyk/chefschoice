@@ -1,17 +1,15 @@
 'use client';
 import React, { useState, use } from 'react'
 import { Button } from '@chimera-ui/components'
-import { FoodBank } from '@mui/icons-material';
 import { Bounce } from "react-activity";
 import "react-activity/dist/library.css";
 import { useStoreContext } from '../Context/store'
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { toast } from "react-toastify";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { UploadButton, UploadDropzone, Uploader } from '../components/uploadthing';
+import { UploadDropzone } from '../components/uploadthing';
 
 
 function AddRecipe() {
@@ -22,12 +20,11 @@ function AddRecipe() {
   const [description, setDescription] = useState('')
   const [cookTime, setCookTime] = useState(0)
   const [imgURL, setImgURL] = useState('')
+  const [deleteImg, setDeleteImg] = useState(false)
   const [msg, setMsg] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  const { successIcon, setSuccessIcon, setBookSection } = useStoreContext();
-  console.log(imgURL);
-  // console.log(instructions)
+  const { setSuccessIcon, setBookSection } = useStoreContext();
 
   const handleSuccess = () => {
     setSuccessIcon(true)
@@ -42,6 +39,10 @@ function AddRecipe() {
     } else {
       alert('Please enter an ingredient before submitting.')
     }
+  }
+
+  const handleDropImgUpload = () => {
+    setDeleteImg((prev) => !prev)
   }
 
   const handleDeleteIngredient = (deletingIngredient) => {
@@ -107,18 +108,21 @@ function AddRecipe() {
         <label> Instructions </label>
         <ReactQuill className='' type='button' placeholder='Instructions' value={instructions} onChange={setInstructions} required></ReactQuill> 
         <label> Image </label>
-        <div className='flex'>
-          <UploadDropzone endpoint="imageUploader"
-            onClientUploadComplete={(res) => {
-              // Do something with the response
-              setImgURL(res[0].fileUrl)
-              toast('Upload Successfull', { hideProgressBar: true, autoClose: 2000, type: 'success' })
-            }}
-            onUploadError={(error) => {
-              // Do something with the error.
-              alert(`ERROR! ${error.message}`);
-            }}
-          />
+        <div className='flex flex-col'>
+          {!deleteImg &&
+            <UploadDropzone endpoint="imageUploader"
+              onClientUploadComplete={(res) => {
+                // Do something with the response
+                setImgURL(res[0].fileUrl)
+                toast('Upload Successfull', { hideProgressBar: true, autoClose: 2000, type: 'success' })
+              }}
+              onUploadError={(error) => {
+                // Do something with the error.
+                alert(`ERROR! ${error.message}`);
+              }}
+            />
+          }
+          <button onClick={() => handleDropImgUpload()}  type='button' className=' m-auto h-fit hover:underline text-blue-400 hover:scale-[1.02] px-2'> Remove/Upload </button>
         </div>
       </form>
       <div className='flex mx-auto h-full'>
@@ -128,6 +132,7 @@ function AddRecipe() {
           <Bounce className='h-[2rem]' />
         }
         </div>
+        <img src={imgURL}></img>
     </div>
   )
 }

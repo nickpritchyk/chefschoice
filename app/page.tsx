@@ -11,7 +11,7 @@ export default function Home() {
           <Searchbar />
         </section>
         <section className='h-full bg-cover bg-center bg-[url("assets/header2.png")]'>
-          <h1 className='border-solid'> Chefs Choice </h1>
+          <h1 className='border-solid'></h1>
         </section>
       </div>
     </div>
