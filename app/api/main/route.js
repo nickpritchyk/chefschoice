@@ -15,6 +15,7 @@ export async function POST(req, res) {
             ingredients: data.ingredientsJSON,
             cooktime: parseInt(data.cookTime),
             instructions: data.instructions,
+            imgurl: data.imgURL,
         }
     })
 

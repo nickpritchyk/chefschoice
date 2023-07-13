@@ -10,7 +10,7 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   
   return (
-    <div className='w-full h-20 border-b-2 fixed top-0 bg-white z-20'>
+    <div className='w-full h-20 shadow-md fixed top-0 bg-white z-20'>
         <nav className='flex h-full items-center ml-8 text-xl justify-between'>
           <Link className='left-3 text-3xl font-bold' href='/'> Home </Link>
           <ul className='hidden sm:flex gap-x-8 mr-16'>

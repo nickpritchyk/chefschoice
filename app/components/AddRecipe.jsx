@@ -11,6 +11,7 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { toast } from "react-toastify";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { UploadButton, UploadDropzone, Uploader } from '../components/uploadthing';
 
 
 function AddRecipe() {
@@ -20,10 +21,12 @@ function AddRecipe() {
   const [instructions, setInstructions] = useState('')
   const [description, setDescription] = useState('')
   const [cookTime, setCookTime] = useState(0)
+  const [imgURL, setImgURL] = useState('')
   const [msg, setMsg] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const { successIcon, setSuccessIcon, setBookSection } = useStoreContext();
+  console.log(imgURL);
   // console.log(instructions)
 
   const handleSuccess = () => {
@@ -62,6 +65,7 @@ function AddRecipe() {
         ingredientsJSON,
         cookTime,
         instructions,
+        imgURL,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
@@ -76,15 +80,15 @@ function AddRecipe() {
     }}
     
   return (
-    <div className="flex flex-col w-full items-center">
+    <div className="flex flex-col w-full items-center mb-24">
       <h1 className='text-2xl font-bold mt-4'> Add Recipe </h1>
       <form className='bg-white h-max w-[75%] sm:w-[35%] flex m-12 flex-col space-y-6 rounded-lg'>
         <label> Recipe Title </label>
         <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='Title' onChange={(e) => setTitle(e.target.value)} required></input>
         <label> Description </label>
-        <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='Describe your recipe' onChange={(e) => setDescription(e.target.value)} required></input>
+        <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='Describe your dish in short' onChange={(e) => setDescription(e.target.value)} required></input>
         <label> Cook Time (in minutes) </label>
-        <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='Total time' type='number' onChange={(e) => setCookTime(e.target.value)} required></input>
+        <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='ex. 60' type='number' onChange={(e) => setCookTime(e.target.value)} onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()} maxlength='4' required></input>
         <label> Ingredients </label>
         <div className='flex relative items-center'>
           <input className='border-[0.5px] border-black p-1 shadow-sm w-full' placeholder='Add one item at a time' value={ingredients} onChange={(e) => setIngredients(e.target.value)}></input>
@@ -103,15 +107,27 @@ function AddRecipe() {
         <label> Instructions </label>
         <ReactQuill className='' type='button' placeholder='Instructions' value={instructions} onChange={setInstructions} required></ReactQuill> 
         <label> Image </label>
-        <AddAPhotoIcon />
-        <div className='flex mx-auto h-full'>
+        <div className='flex'>
+          <UploadDropzone endpoint="imageUploader"
+            onClientUploadComplete={(res) => {
+              // Do something with the response
+              setImgURL(res[0].fileUrl)
+              toast('Upload Successfull', { hideProgressBar: true, autoClose: 2000, type: 'success' })
+            }}
+            onUploadError={(error) => {
+              // Do something with the error.
+              alert(`ERROR! ${error.message}`);
+            }}
+          />
+        </div>
+      </form>
+      <div className='flex mx-auto h-full'>
         {!isLoading &&
           <Button type='submit' className='h-[2rem]' onClick={sendRecipe}> Submit Recipe </Button>
         }{isLoading && 
           <Bounce className='h-[2rem]' />
         }
         </div>
-      </form>
     </div>
   )
 }

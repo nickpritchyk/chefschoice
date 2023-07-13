@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import { StoreContextProvider } from './Context/store'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import "@uploadthing/react/styles.css";
 
 const PT = PT_Serif({
   weight: '400',
