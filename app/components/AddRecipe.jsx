@@ -89,7 +89,7 @@ function AddRecipe() {
         <label> Description </label>
         <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='Describe your dish in short' onChange={(e) => setDescription(e.target.value)} required></input>
         <label> Cook Time (in minutes) </label>
-        <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='ex. 60' type='number' onChange={(e) => setCookTime(e.target.value)} onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()} maxlength='4' required></input>
+        <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='ex. 60' type='number' onChange={(e) => setCookTime(e.target.value)} onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()} required></input>
         <label> Ingredients </label>
         <div className='flex relative items-center'>
           <input className='border-[0.5px] border-black p-1 shadow-sm w-full' placeholder='Add one item at a time' value={ingredients} onChange={(e) => setIngredients(e.target.value)}></input>
