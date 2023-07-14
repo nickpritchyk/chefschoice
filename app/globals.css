@@ -25,8 +25,8 @@
   --input-focus: hsl(0, 0%, 100%);
   --input-content: hsl(0, 0%, 15%);
   --input-content-2: hsl(0, 0%, 37%);
-  --primary: hsl(217, 100%, 51%);
-  --primary-focus: hsl(217, 100%, 45.5%);
+  --primary: #bf9543;
+  --primary-focus: rgb(236, 185, 122);
   --primary-subtle: hsl(217, 100%, 78.5%);
   --primary-content: hsl(217, 100%, 100%);
   --primary-subtle-content: hsl(217, 100%, 0%);
@@ -67,4 +67,8 @@ html {
 body {
   height: 100vh;
   padding-top: 80px;
+}
+
+.navlinks:hover {
+  color: #bf9543;
 }

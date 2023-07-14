@@ -1,15 +1,10 @@
 import './globals.css'
-import { PT_Serif } from 'next/font/google'
 import Navbar from './components/Navbar'
 import { StoreContextProvider } from './Context/store'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import "@uploadthing/react/styles.css";
-
-const PT = PT_Serif({
-  weight: '400',
-  subsets: ['latin'],
-})
+import { PT } from './fonts'
 
 export const metadata = {
   title: 'Chefs Choice',

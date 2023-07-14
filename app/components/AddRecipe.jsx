@@ -93,7 +93,7 @@ function AddRecipe() {
         <label> Ingredients </label>
         <div className='flex relative items-center'>
           <input className='border-[0.5px] border-black p-1 shadow-sm w-full' placeholder='Add one item at a time' value={ingredients} onChange={(e) => setIngredients(e.target.value)}></input>
-          <button className='flex bg-blue-500 rounded-md absolute right-1' type='button' onClick={handleIngredientClick}><AddIcon /></button>
+          <button className='flex bg-[#bf9543] hover:bg-[#ecb97a] rounded-md absolute right-1' type='button' onClick={handleIngredientClick}><AddIcon /></button>
         </div>
         {ingredientsArr.length > 0 &&
         <ul className='sm:text-[18px] border-y-[1px] p-4'>
