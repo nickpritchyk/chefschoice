@@ -23,5 +23,5 @@ export async function POST(req, res) {
 
 export async function GET(req, res) {
     const data = await prisma.recipebook.findMany()
-    return res.send(data)
+    return NextResponse.json(data)
 }

@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, use } from 'react'
 import { Button } from '@chimera-ui/components'
 import { Bounce } from "react-activity";
@@ -7,9 +8,11 @@ import { useStoreContext } from '../Context/store'
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
 import { toast } from "react-toastify";
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { UploadDropzone } from '../components/uploadthing';
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
 
 function AddRecipe() {

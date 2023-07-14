@@ -3,7 +3,6 @@
 import React from 'react'
 import ButtonGroup from '../components/ButtonGroup'
 import AddRecipe from '../components/AddRecipe'
-import RecipeCards from '../components/RecipeCards'
 import { useStoreContext } from '../Context/store'
 
 
@@ -14,9 +13,8 @@ function page() {
   return (
     <div className='flex items-center flex-col mt-8'>
         <ButtonGroup></ButtonGroup>
-        {bookSection 
-          ? <AddRecipe></AddRecipe>
-          : <RecipeCards></RecipeCards>
+        {bookSection &&
+          <AddRecipe></AddRecipe>
         }
     </div>
   )
