@@ -5,9 +5,9 @@ import Searchbar from './components/Searchbar.jsx'
 
 export default function Home() {
   return (
-    <div className='flex h-full w-full'>
+    <div className='flex h-full w-full bg-center bg-[url("assets/header1.png")]'>
       <div className='grow'>
-        <section className='flex flex-col items-center h-full bg-cover bg-center bg-[url("assets/header1.png")]'>
+        <section className='flex flex-col items-center h-full bg-cover'>
           <Searchbar />
         </section>
         <section className='h-full bg-cover bg-center bg-[url("assets/header2.png")]'>

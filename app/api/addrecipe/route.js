@@ -1,4 +1,3 @@
-import { request } from 'http'
 import { NextResponse } from 'next/server'
 
 const { PrismaClient } = require('@prisma/client')
@@ -17,7 +16,6 @@ export async function POST(req, res) {
             imgurl: data.imgURL,
         }
     })
-
     return NextResponse.json({ message: 'Recipe Added' })
 }
 

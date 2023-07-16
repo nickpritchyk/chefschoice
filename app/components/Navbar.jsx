@@ -14,7 +14,7 @@ function Navbar() {
   return (
     <div className='w-full h-20 shadow-md fixed top-0 bg-white z-20'>
         <nav className='flex h-full items-center ml-8 text-xl'>
-          <Link className='left-3 text-4xl text-[#bf9543]' href='/'> <h1 className={nerve.className}> ChefsChoice </h1></Link>
+          <Link className='left-3 text-4xl text-[#F99648]' href='/'> <h1 className={nerve.className}> ChefsChoice </h1></Link>
           <ul className='hidden lg:flex gap-x-8 absolute right-16'>
             <Link className='navlinks' href='/'> Favorites </Link>
             <Link className='navlinks' href='/book'> Recipe Book </Link>

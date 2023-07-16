@@ -9,12 +9,12 @@ function ButtonGroup() {
   const { bookSection, setBookSection } = useStoreContext();
 
   return (
-    <div className='flex w-full justify-center items-center flex-col space-y-4 py-2 sm:w-full sm:space-x-12 sm:flex-row sm:space-y-0'>
+    <div className='flex w-full sm:ml-24 items-center flex-col space-y-4 py-2 sm:w-full sm:space-x-12 sm:flex-row sm:space-y-0'>
         <Button onClick={() => {setBookSection((prev) => !prev)} }>
             Add Recipe
         </Button>
         <Button>
-            <Link href='/book/'> Filter Recipes </Link>
+            <Link href='/book/'> Delete Recipe </Link>
         </Button>
     </div>
   )

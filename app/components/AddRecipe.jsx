@@ -10,9 +10,9 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { toast } from "react-toastify";
 import 'react-quill/dist/quill.snow.css';
 import { UploadDropzone } from '../components/uploadthing';
-import dynamic from "next/dynamic";
+import ReactQuill from 'react-quill';
 
-const ReactQuill = dynamic(import('react-quill'), { ssr: false })
+// const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 
 
 function AddRecipe() {
@@ -61,7 +61,7 @@ function AddRecipe() {
     if(title && ingredientsArr && instructions && description && cookTime) {
       setIsLoading(true)
     const ingredientsJSON = JSON.stringify(ingredientsArr)
-    await fetch('/api/main', {
+    await fetch('/api/addrecipe', {
       method: 'POST',
       body: JSON.stringify({
         title,
@@ -95,8 +95,8 @@ function AddRecipe() {
         <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='ex. 60' type='number' onChange={(e) => setCookTime(e.target.value)} onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()} required></input>
         <label> Ingredients </label>
         <div className='flex relative items-center'>
-          <input className='border-[0.5px] border-black p-1 shadow-sm w-full' placeholder='Add one item at a time' value={ingredients} onChange={(e) => setIngredients(e.target.value)}></input>
-          <button className='flex bg-[#bf9543] hover:bg-[#ecb97a] rounded-md absolute right-1' type='button' onClick={handleIngredientClick}><AddIcon /></button>
+          <input className='border-[0.5px] border-black p-1 shadow-sm w-full' placeholder='ex. 1lb chicken' value={ingredients} onChange={(e) => setIngredients(e.target.value)}></input>
+          <button className='flex bg-[#F99648] hover:bg-[#ecb97a] rounded-md absolute right-1' type='button' onClick={handleIngredientClick}><AddIcon /></button>
         </div>
         {ingredientsArr.length > 0 &&
         <ul className='sm:text-[18px] border-y-[1px] p-4'>

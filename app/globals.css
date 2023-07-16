@@ -25,7 +25,7 @@
   --input-focus: hsl(0, 0%, 100%);
   --input-content: hsl(0, 0%, 15%);
   --input-content-2: hsl(0, 0%, 37%);
-  --primary: #bf9543;
+  --primary: #F99648;
   --primary-focus: rgb(236, 185, 122);
   --primary-subtle: hsl(217, 100%, 78.5%);
   --primary-content: hsl(217, 100%, 100%);
@@ -70,5 +70,5 @@ body {
 }
 
 .navlinks:hover {
-  color: #bf9543;
+  color: #F99648;
 }
