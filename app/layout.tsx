@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import "@uploadthing/react/styles.css";
 import { PT } from './fonts'
+import AuthProvider from './components/AuthProvider';
 
 export const metadata = {
   title: 'Chefs Choice',
@@ -19,11 +20,13 @@ export default function RootLayout({
   return (
     <html className={PT.className} lang="en">
       <body className=''>
-        <StoreContextProvider>
-          {children}
-        </StoreContextProvider>
-        <Navbar />
-        <ToastContainer />
+        <AuthProvider>
+          <StoreContextProvider>
+            {children}  
+          </StoreContextProvider>
+          <Navbar />
+          <ToastContainer />
+        </AuthProvider>
       </body>
     </html>
   )

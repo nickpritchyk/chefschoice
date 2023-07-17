@@ -5,9 +5,12 @@ import Link from 'next/link'
 import CloseIcon from '@mui/icons-material/Close'
 import TableRowsIcon from '@mui/icons-material/TableRows'
 import { nerve } from '../fonts'
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 
 function Navbar() {
+
+  const session = useSession()
 
   const [isOpen, setIsOpen] = useState(false)
   
@@ -19,6 +22,10 @@ function Navbar() {
             <Link className='navlinks' href='/'> Favorites </Link>
             <Link className='navlinks' href='/book'> Recipe Book </Link>
             <Link className='navlinks' href='/about'> About </Link>
+            {session?.data 
+              ? <button type='button' onClick={() => signOut()}> {session.data?.user.name} </button>
+              : <button type='button' onClick={() => signIn()}> Sign in </button>
+            }
           </ul>
           <TableRowsIcon className='lg:invisible fixed right-4 mx-8 hover:animate-pulse hover:text-gray-600 cursor-pointer' onClick={() => setIsOpen((prev) => (!prev))}> x </TableRowsIcon>
         </nav>
