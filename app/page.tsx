@@ -3,7 +3,12 @@ import header1 from './assets/header1.png'
 import Autocomplete from '@mui/material/Autocomplete'
 import Searchbar from './components/Searchbar.jsx'
 
+const { PrismaClient } = require('@prisma/client')
+
+const prisma = new PrismaClient()
+
 export default function Home() {
+
   return (
     <div className='flex h-full w-full bg-center bg-[url("assets/header1.png")]'>
       <div className='grow'>

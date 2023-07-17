@@ -15,18 +15,15 @@ model recipebook {
   cooktime     Int
   instructions String  @db.MediumText
   imgurl       String? @db.VarChar(100)
-  userid       Int
-  users        users   @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "userid")
+  userid       Int?
+  users        users?  @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "userid")
 
   @@index([userid], map: "userid_idx")
 }
 
 model users {
-  userid       Int          @id @default(autoincrement())
-  username     String       @db.VarChar(45)
-  /// @encrypted
-  password     String       @db.VarChar(100)
-  /// @encryption:hash(password)
-  passwordHash String       @unique(map: "passwordHash_UNIQUE") @db.VarChar(100)
-  recipebook   recipebook[]
+  userid     Int          @id @default(autoincrement())
+  username   String       @unique(map: "username_UNIQUE") @db.VarChar(45)
+  password   String       @db.VarChar(100)
+  recipebook recipebook[]
 }

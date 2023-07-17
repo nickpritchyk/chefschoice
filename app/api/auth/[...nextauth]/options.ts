@@ -1,6 +1,12 @@
 import type { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
+
+const { PrismaClient } = require('@prisma/client')
+
+const prisma = new PrismaClient()
+
+
 export const options: NextAuthOptions = {
     providers: [
         CredentialsProvider({
@@ -10,17 +16,21 @@ export const options: NextAuthOptions = {
                 password: { label: "Password", type: "password", placeholder: "Password" }
             },
             async authorize(credentials) {
-                const res = await fetch('/api/login', {
-                    method: "POST",
-                    body: JSON.stringify(credentials),
-                    headers: { "Content-Type": "application/json" }
-                })
-                const user = await res.json()
-
-                if(res.ok && user) {
-                    return user
-                } else {
+                if(!credentials?.username && !credentials?.password) {
                     return null
+                }
+                const user = await prisma.users.findUnique({
+                    where: {
+                        username: credentials.username,
+                    }
+                })
+
+                if(!user) return null
+
+                if(credentials.password !== user.password) {
+                    return null
+                } else {
+                    return user
                 }
             }
         })
