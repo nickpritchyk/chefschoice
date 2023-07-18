@@ -1,6 +1,6 @@
 
 const getRecipes = async () => {
-    const data = await fetch('http://localhost:3000/api/addrecipe')
+    const data = await fetch('http://localhost:3000/api/addrecipe', {cache: "no-store"})
       if (!data.ok) {
         throw new Error('Failed to fetch data')
     }

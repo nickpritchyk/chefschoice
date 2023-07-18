@@ -19,7 +19,7 @@ export async function POST(req, res) {
     return NextResponse.json({ message: 'Recipe Added' })
 }
 
-export async function GET(req, res) {
+export async function GET() {
     const data = await prisma.recipebook.findMany()
     return NextResponse.json(data)
 }
