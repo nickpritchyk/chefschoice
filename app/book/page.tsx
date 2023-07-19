@@ -8,7 +8,6 @@ import { useStoreContext } from '../Context/store'
 
 function page() {
   const { bookSection } = useStoreContext();
-  console.log(bookSection)
 
   return (
     <div className='flex items-center flex-col mt-8'>

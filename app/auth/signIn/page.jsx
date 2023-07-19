@@ -49,13 +49,13 @@ function LoginPage() {
                     <label className="block text-gray-700 text-sm font-bold mb-2" type="username">
                         Username
                     </label>
-                    <input className="border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight" id="username" type="text" placeholder="Enter a username" onChange={(e) => SetUsername(e.target.value)} required></input>
+                    <input className="border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight" id="username" type="text" placeholder="Enter your username" onChange={(e) => SetUsername(e.target.value)} required></input>
                 </div>
                 <div className="mb-6">
                     <label className="block text-gray-700 text-sm font-bold mb-2" type="password">
                         Password
                     </label>
-                    <input className="border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight" id="password" type="password" placeholder="Enter a password" onChange={(e) => SetPassword(e.target.value)} required></input>
+                    <input className="border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight" id="password" type="password" placeholder="Enter your password" onChange={(e) => SetPassword(e.target.value)} required></input>
                 </div>
                 <div className="flex items-center justify-center">
                     <Button type='submit' className="font-bold py-2 px-4 rounded">

@@ -11,11 +11,11 @@ import { toast } from "react-toastify";
 import 'react-quill/dist/quill.snow.css';
 import { UploadDropzone } from '../components/uploadthing';
 import ReactQuill from 'react-quill';
-
-// const ReactQuill = dynamic(import('react-quill'), { ssr: false })
+import { useSession } from 'next-auth/react';
 
 
 function AddRecipe() {
+  const session = useSession()
   const [title, setTitle] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [ingredientsArr, setIngredientsArr] = useState([])
@@ -137,6 +137,8 @@ function AddRecipe() {
         </div>
         <img src={imgURL}></img>
     </div>
+
+    
   )
 }
 

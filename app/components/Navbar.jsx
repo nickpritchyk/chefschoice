@@ -23,8 +23,8 @@ function Navbar() {
             <Link className='navlinks' href='/book'> Recipe Book </Link>
             <Link className='navlinks' href='/about'> About </Link>
             {session?.data 
-              ? <button type='button' onClick={() => signOut()}> {session.data?.user.name} </button>
-              : <button type='button' onClick={() => signIn()}> Sign in </button>
+              ? <button className='navlinks' type='button' onClick={() => signOut()}> {session.data?.user.name} </button>
+              : <button className='navlinks' type='button' onClick={() => signIn()}> Sign in </button>
             }
           </ul>
           <TableRowsIcon className='lg:invisible fixed right-4 mx-8 hover:animate-pulse hover:text-gray-600 cursor-pointer' onClick={() => setIsOpen((prev) => (!prev))}> x </TableRowsIcon>
@@ -36,6 +36,10 @@ function Navbar() {
               <Link className='navlinks' href='/'> Favorites </Link>
               <Link className='navlinks' href='/book'> Recipe Book </Link>
               <Link className='navlinks' href='/about'> About </Link>
+              {session?.data 
+              ? <button className='flex hover:text-[#F99648]' type='button' onClick={() => signOut()}> {session.data?.user.name} </button>
+              : <button className='flex hover:text-[#F99648]' type='button' onClick={() => signIn()}> Sign in </button>
+              }
             </ul>
           </nav>
         }
