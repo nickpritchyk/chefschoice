@@ -8,7 +8,6 @@ function SignupForm() {
   const [isLoading, setIsLoading] = useState(false)
 
   async function handleSubmit(e) {
-    console.log(password)
     e.preventDefault()
     await fetch('/api/signup', {
       method: 'POST',
@@ -20,7 +19,6 @@ function SignupForm() {
         "Content-type": "application/json; charset=UTF-8"
       },
     }).then((res) => {
-          // console.log(res.json())
           setIsLoading(false)
         }  
       )

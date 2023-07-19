@@ -10,7 +10,7 @@ const prisma = new PrismaClient()
 export default function Home() {
 
   return (
-    <div className='flex h-full w-full bg-center bg-[url("assets/header1.png")]'>
+    <div className='flex h-full w-full bg-cover bg-center bg-[url("assets/header1.png")]'>
       <div className='grow'>
         <section className='flex flex-col items-center h-full bg-cover'>
           <Searchbar />
