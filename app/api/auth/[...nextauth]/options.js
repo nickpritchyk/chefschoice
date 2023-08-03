@@ -1,18 +1,18 @@
-import type { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-
-const { PrismaClient } = require('@prisma/client')
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
 
-export const options: NextAuthOptions = {
+export const options = {
     session: {
         strategy: 'jwt'
     },
     providers: [
         CredentialsProvider({
             name: 'Credentials',
+            userid: 'Credentials',
             credentials: {
                 username: { label: "Username", type: "text", placeholder: "Username" },
                 password: { label: "Password", type: "password", placeholder: "Password" }
@@ -34,11 +34,28 @@ export const options: NextAuthOptions = {
                 } else {
                     return {
                         name: user.username,
+                        userid: user.userid,
                     }
                 }
-            }
+            },
         })
     ],
+    adapter: PrismaAdapter(prisma),
+    secret: process.env.SECRET,
+    callbacks: {
+        async jwt({ token, user }) {
+            // Initial sign in
+            if (user) {
+                token.sub = user.userid
+            }
+            return token
+        },
+        async session({ session, token }) {
+            // Add property to session, like `userId`
+            session.userid = token.sub
+            return session
+        }
+    },
 
     pages: {
         signIn: '/auth/signIn'

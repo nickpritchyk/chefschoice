@@ -24,7 +24,7 @@ function ButtonGroup() {
             Add Recipe
         </Button>
         <Button>
-            <Link href='/book/'> Delete Recipe </Link>
+            <Link href='/recipedeck'> Search Recipes </Link>
         </Button>
     </div>
   )

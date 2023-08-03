@@ -15,8 +15,8 @@ model recipebook {
   cooktime     Int
   instructions String  @db.MediumText
   imgurl       String? @db.VarChar(100)
-  userid       Int?
-  users        users?  @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "userid")
+  userid       Int
+  users        users   @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "userid")
 
   @@index([userid], map: "userid_idx")
 }

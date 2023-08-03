@@ -18,6 +18,7 @@
     "@heroicons/react": "^2.0.18",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.7",
+    "@next-auth/prisma-adapter": "^0.4.4-canary.81",
     "@prisma/client": "^4.16.2",
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",

@@ -15,7 +15,9 @@ import { useSession } from 'next-auth/react';
 
 
 function AddRecipe() {
-  const session = useSession()
+  const session = useSession();
+  console.log(session);
+  const [userid, setUserId] = useState(22)
   const [title, setTitle] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [ingredientsArr, setIngredientsArr] = useState([])
@@ -70,6 +72,7 @@ function AddRecipe() {
         cookTime,
         instructions,
         imgURL,
+        userid,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"

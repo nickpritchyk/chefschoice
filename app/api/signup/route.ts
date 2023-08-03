@@ -8,12 +8,12 @@ prisma.$use(fieldEncryptionMiddleware())
 
 export async function POST(req: Request, res: Response) {
     const data = await req.json()
-    const unique = await prisma.users.findUnique({
+    const notUnique = await prisma.users.findUnique({
         where: {
             username: data.username
         }
     })
-    if(unique) {
+    if(notUnique) {
         return new Response(JSON.stringify('Username already taken'), {
             status: 406
         })
@@ -21,7 +21,7 @@ export async function POST(req: Request, res: Response) {
         await prisma.users.create({
             data: {
                 username: data.username,
-                password: data.password
+                password: data.password,
             }
         })
         return new Response(JSON.stringify('Account successfully created'))
