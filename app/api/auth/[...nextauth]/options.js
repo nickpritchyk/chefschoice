@@ -34,6 +34,7 @@ export const options = {
                 } else {
                     return {
                         name: user.username,
+                        userid: user.userid,
                     }
                 }
             },

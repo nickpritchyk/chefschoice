@@ -17,6 +17,7 @@ import { useSession } from 'next-auth/react';
 function AddRecipe() {
   const session = useSession();
   const [userid, setUserid] = useState(session.data.userid)
+  console.log(session)
   const [title, setTitle] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [ingredientsArr, setIngredientsArr] = useState([])
