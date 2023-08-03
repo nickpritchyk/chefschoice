@@ -16,8 +16,7 @@ import { useSession } from 'next-auth/react';
 
 function AddRecipe() {
   const session = useSession();
-  console.log(session);
-  const [userid, setUserId] = useState(22)
+  const [userid, setUserid] = useState(session.data.userid)
   const [title, setTitle] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [ingredientsArr, setIngredientsArr] = useState([])
@@ -60,7 +59,7 @@ function AddRecipe() {
 
   const sendRecipe = async (e) => {
     e.preventDefault();
-    if(title && ingredientsArr && instructions && description && cookTime) {
+    if(title && ingredientsArr && instructions && description && cookTime && userid) {
       setIsLoading(true)
     const ingredientsJSON = JSON.stringify(ingredientsArr)
     await fetch('/api/addrecipe', {

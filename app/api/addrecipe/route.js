@@ -14,6 +14,7 @@ export async function POST(req, res) {
             cooktime: parseInt(data.cookTime),
             instructions: data.instructions,
             imgurl: data.imgURL,
+            userid: data.userid,
         }
     })
     return NextResponse.json({ message: 'Recipe Added' })
