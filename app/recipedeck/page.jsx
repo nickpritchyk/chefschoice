@@ -10,14 +10,19 @@ const getRecipes = async () => {
 
 async function recipedeck() {
     const recipe = await getRecipes()
+    console.log(recipe)
+
 
     return (
         <div className="grid grid-cols-3 gap-4 justify-items-center m-12"> 
         {recipe.map(res => 
             
             <div className="w-[350px] h-[400px] mb-12 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <p className="text-white">
+                    { res.users.username }
+                </p>
                 <a href="#">
-                    <img className="rounded-t-lg" src={'/'} alt='img' />
+                    <img className="rounded-t-lg" src={res.imgurl} alt='img' />
                 </a>
                 <div className="p-5">
                     <a href="#">

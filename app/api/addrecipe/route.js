@@ -21,6 +21,10 @@ export async function POST(req, res) {
 }
 
 export async function GET() {
-    const data = await prisma.recipebook.findMany()
+    const data = await prisma.recipebook.findMany({
+        include: {
+            users: true
+        }
+    })
     return NextResponse.json(data)
 }
