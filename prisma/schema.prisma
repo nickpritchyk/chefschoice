@@ -15,6 +15,7 @@ model recipebook {
   cooktime     Int
   instructions String  @db.MediumText
   imgurl       String? @db.VarChar(100)
+  likes        Int
   userid       Int
   users        users   @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "userid")
 
