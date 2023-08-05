@@ -15,7 +15,6 @@ model recipebook {
   cooktime     Int
   instructions String  @db.MediumText
   imgurl       String? @db.VarChar(100)
-  likes        Int
   userid       Int
   users        users   @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "userid")
 
@@ -26,5 +25,15 @@ model users {
   userid     Int          @id @default(autoincrement())
   username   String       @unique(map: "username_UNIQUE") @db.VarChar(45)
   password   String       @db.VarChar(100)
+  comments   comments[]
   recipebook recipebook[]
+}
+
+model comments {
+  id       Int    @id
+  comment  String @db.VarChar(280)
+  authorid Int
+  users    users  @relation(fields: [authorid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "authorid")
+
+  @@index([authorid], map: "authorid_idx")
 }

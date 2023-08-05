@@ -21,6 +21,7 @@ function Navbar() {
           <ul className='hidden lg:flex gap-x-8 absolute right-16'>
             <Link className='navlinks' href='/'> Favorites </Link>
             <Link className='navlinks' href='/book'> Recipe Book </Link>
+            <Link className='navlinks' href='/recipedeck'> Recipes </Link>
             <Link className='navlinks' href='/about'> About </Link>
             {session?.data 
               ? <button className='navlinks' type='button' onClick={() => signOut()}> {session.data?.user.name} </button>
@@ -35,6 +36,7 @@ function Navbar() {
               <CloseIcon className='gap-y-8 right-0 left-0 hover:animate-pulse hover:text-gray-600 cursor-pointer' onClick={() => setIsOpen((prev) => (!prev))}> x </CloseIcon>
               <Link className='navlinks' href='/'> Favorites </Link>
               <Link className='navlinks' href='/book'> Recipe Book </Link>
+              <Link className='navlinks' href='/recipedeck'> Recipes </Link>
               <Link className='navlinks' href='/about'> About </Link>
               {session?.data 
               ? <button className='flex hover:text-[#F99648]' type='button' onClick={() => signOut()}> {session.data?.user.name} </button>

@@ -7,7 +7,7 @@ import { useStoreContext } from '../Context/store'
 import { useSession, signIn } from 'next-auth/react';
 
 function ButtonGroup() {
-  const { bookSection, setBookSection } = useStoreContext();
+  const { setBookSection } = useStoreContext();
   const session = useSession()
   
   function handleClick() {
