@@ -9,6 +9,7 @@ export const StoreContextProvider = ({ children }) => {
     const [bookSection, setBookSection] = useState(false)
     const [successIcon, setSuccessIcon] = useState(null)
     const [recipes, setRecipes] = useState([])
+    const [singleRecipe, setSingleRecipe] = useState([])
 
     useEffect(() => {
         async function getRecipes() {
@@ -25,9 +26,9 @@ export const StoreContextProvider = ({ children }) => {
                 .then()
         }
         getRecipes()
-    })
+    }, [])
 
-    const contextValue = { bookSection, setBookSection, successIcon, setSuccessIcon, recipes, setRecipes }
+    const contextValue = { bookSection, setBookSection, successIcon, setSuccessIcon, recipes, setRecipes, singleRecipe, setSingleRecipe }
 
     return(
         <StoreContext.Provider value={contextValue}>

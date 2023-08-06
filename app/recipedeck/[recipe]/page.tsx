@@ -1,3 +1,5 @@
+import SingleRecipe from '../../components/SingleRecipe'
+
 type Params = {
     params: {
         recipe: string
@@ -6,9 +8,7 @@ type Params = {
 
 function recipe({ params: {recipe}}: Params) {
   return (
-    <div>
-        <h1></h1>
-    </div>
+    <SingleRecipe recipeID={recipe}/>
   )
 }
 

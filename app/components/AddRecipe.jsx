@@ -62,7 +62,6 @@ function AddRecipe() {
     e.preventDefault();
     if(title && ingredientsArr && instructions && description && cookTime && userid) {
       setIsLoading(true)
-    const ingredientsJSON = JSON.stringify(ingredientsArr)
     await fetch('/api/addrecipe', {
       method: 'POST',
       body: JSON.stringify({

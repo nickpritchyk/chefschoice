@@ -1,7 +1,3 @@
-'use client';
-
-import { useStoreContext } from '../Context/store'
-import { useState } from 'react';
 import Recipes from '../components/Recipes'
 
 // const handleComment = async () => {
