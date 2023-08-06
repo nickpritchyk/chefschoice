@@ -1,21 +1,14 @@
-import { useState } from "react"
 import Link from 'next/link';
+import { useStoreContext } from '../Context/store';
 import AddCommentOutlinedIcon from '@mui/icons-material/AddCommentOutlined';
 
-const getRecipes = async () => {
-    const data = await fetch('http://localhost:3000/api/addrecipe', {cache: "no-store"})
-      if (!data.ok) {
-        throw new Error('Failed to fetch data')
-    }
-    return data.json()
-}
 
-async function Recipes() {
-    const recipe = await getRecipes()
+function Recipes() {
+    const { recipes } = useStoreContext()
 
     return (
         <div className="grid grid-cols-4 gap-4 justify-items-center m-12"> 
-        {recipe.map(res => 
+        {recipes.map(res => 
             
             <div className="relative w-full h-fit mb-12 border border-gray-200 rounded-lg shadow-lg bg-white hover:scale-[1.01]">
                 <img className="object-fill" src={res.imgurl} alt='img' />
