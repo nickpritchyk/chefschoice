@@ -4,7 +4,7 @@ import { useStoreContext } from '../Context/store'
 import { useState, useEffect } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-export default function SingleRecipe({ recipeID }) {
+export default function MySingleRecipe({ recipeID }) {
     const [commentsOpen, setCommentsOpen] = useState(false)
 
     function isCommentsOpen() {

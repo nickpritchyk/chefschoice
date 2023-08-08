@@ -1,4 +1,4 @@
-import SingleRecipe from '../../components/SingleRecipe'
+import MySingleRecipe from '../../components/MySingleRecipe'
 
 type Params = {
     params: {
@@ -9,7 +9,7 @@ type Params = {
 function recipe({ params: {recipe}}: Params) {
   return (
     <div className='flex justify-center h-fit w-full'>
-      <SingleRecipe recipeID={recipe}/>
+      <MySingleRecipe recipeID={recipe}/>
     </div>
   )
 }

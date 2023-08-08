@@ -14,10 +14,9 @@ import ReactQuill from 'react-quill';
 import { useSession } from 'next-auth/react';
 
 
-function AddRecipe() {
+function EditRecipe() {
   const session = useSession();
   const [userid, setUserid] = useState(session.data.userid)
-  console.log(session)
   const [title, setTitle] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [ingredientsArr, setIngredientsArr] = useState([])
@@ -34,7 +33,7 @@ function AddRecipe() {
   const handleSuccess = () => {
     setSuccessIcon(true)
     setBookSection(false)
-    toast('Recipe Added', { hideProgressBar: true, autoClose: 3000, type: 'success' })
+    toast('Recipe Updated', { hideProgressBar: true, autoClose: 3000, type: 'success' })
   }
 
   const handleIngredientClick = () => {
@@ -63,7 +62,7 @@ function AddRecipe() {
     if(title && ingredientsArr && instructions && description && cookTime && userid) {
       setIsLoading(true)
     const ingredientsJSON = JSON.stringify(ingredientsArr)
-    await fetch('/api/addrecipe', {
+    await fetch('/api/EditRecipe', {
       method: 'POST',
       body: JSON.stringify({
         title,
@@ -88,10 +87,10 @@ function AddRecipe() {
     
   return (
     <div className="flex flex-col w-full items-center mb-24">
-      <h1 className='text-2xl font-bold mt-4'> Add Recipe </h1>
+      <h1 className='text-2xl font-bold mt-4'> Edit Recipe </h1>
       <form className='bg-white h-max w-[75%] sm:w-[35%] flex m-12 flex-col space-y-6 rounded-lg'>
         <label> Recipe Title </label>
-        <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='Title' onChange={(e) => setTitle(e.target.value)} required></input>
+        <input className='border-[0.5px] border-black p-1 shadow-sm' value={'hey'} placeholder='Title' onChange={(e) => setTitle(e.target.value)} required></input>
         <label> Description </label>
         <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='Describe your dish in short' onChange={(e) => setDescription(e.target.value)} required></input>
         <label> Cook Time (in minutes) </label>
@@ -145,4 +144,4 @@ function AddRecipe() {
   )
 }
 
-export default AddRecipe
+export default EditRecipe

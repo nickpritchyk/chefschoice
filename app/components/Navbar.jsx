@@ -15,7 +15,7 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   
   return (
-    <div className='w-full h-20 shadow-md fixed top-0 bg-white z-20'>
+    <div className='w-full h-20 shadow-md fixed top-0 bg-white z-10'>
         <nav className='flex h-full items-center ml-8 text-xl'>
           <Link className='left-3 text-4xl text-[#F99648]' href='/'> <h1 className={nerve.className}> ChefsChoice </h1></Link>
           <ul className='hidden lg:flex gap-x-8 absolute right-16'>
@@ -30,9 +30,9 @@ function Navbar() {
           </ul>
           <TableRowsIcon className='lg:invisible fixed right-4 mx-8 hover:animate-pulse hover:text-gray-600 cursor-pointer' onClick={() => setIsOpen((prev) => (!prev))}> x </TableRowsIcon>
         </nav>
-        {isOpen &&
-          <nav className='lg:hidden h-64 shadow-xl'>
-            <ul className='bg-white shadow-md flex flex-col h-full justify-evenly pl-4 text-2xl'>
+
+          <nav className={isOpen ? 'bg-white flex w-full h-[50vh] shadow-md lg:invisible transition-all duration-300 ease-in-out': 'h-[50vh] w-full invisible transition-all duration-300 ease-in-out'}>
+            <ul className='flex flex-col h-full w-full justify-evenly pl-4 text-2xl gap-4'>
               <CloseIcon className='gap-y-8 right-0 left-0 hover:animate-pulse hover:text-gray-600 cursor-pointer' onClick={() => setIsOpen((prev) => (!prev))}> x </CloseIcon>
               <Link className='navlinks' href='/'> Favorites </Link>
               <Link className='navlinks' href='/book'> Recipe Book </Link>
@@ -44,7 +44,7 @@ function Navbar() {
               }
             </ul>
           </nav>
-        }
+        
     </div>
   )
 }
