@@ -28,7 +28,7 @@ function Navbar() {
               ? <div className='flex flex-col'>
                   <button className='text-[rgb(255,143,58)] hover:animate-pulse' type='button' onClick={() => setProfileIsOpen(prev => !prev)}> {session.data?.user.name} </button>
                   {profileIsOpen && 
-                    <div className='flex flex-col w-fit bg-white shadow-lg p-4 items-start gap-4 border-[1px] rounded-md border-[rgb(255,143,58)] absolute right-0 top-20'>
+                    <div className='flex flex-col w-36 bg-white shadow-lg p-4 items-start gap-4 border-[1px] rounded-md fixed top-[4rem] right-2'>
                       <CloseIcon className='hover:animate-pulse hover:text-gray-600 cursor-pointer' onClick={() => setProfileIsOpen((prev) => (!prev))}> x </CloseIcon>
                       <Link className='navlinks' href='/myrecipes'> My Recipes </Link>
                       <button className='navlinks' onClick={() => signOut()}> Sign out </button>
@@ -41,7 +41,7 @@ function Navbar() {
           <TableRowsIcon className='lg:invisible fixed right-4 mx-8 hover:animate-pulse hover:text-gray-600 cursor-pointer' onClick={() => setIsOpen((prev) => (!prev))}> x </TableRowsIcon>
         </nav>
 
-          <nav className={isOpen ? 'bg-white flex w-full h-[50vh] shadow-md lg:invisible transition-all duration-300 ease-in-out': 'h-[50vh] w-full invisible transition-all duration-300 ease-in-out'}>
+          <nav className={isOpen ? 'bg-white flex w-full h-[50vh] shadow-md lg:invisible transition-all duration-300 ease-in-out': 'h-[50vh] w-full invisible'}>
             <ul className='flex flex-col h-full w-full justify-evenly pl-4 text-2xl gap-4'>
               <CloseIcon className='gap-y-8 right-0 left-0 hover:animate-pulse hover:text-gray-600 cursor-pointer' onClick={() => setIsOpen((prev) => (!prev))}> x </CloseIcon>
               <Link className='navlinks' href='/'> Favorites </Link>
@@ -51,6 +51,12 @@ function Navbar() {
               {session?.data 
               ? <button className='flex text-[rgb(255,143,58)]' type='button' onClick={() => setProfileIsOpen(prev => !prev)}> {session.data?.user.name} </button>
               : <button className='flex hover:text-[#F99648]' type='button' onClick={() => signIn()}> Sign in </button>
+              }
+              {profileIsOpen && 
+                    <div className='flex flex-col ml-2 items-start gap-2'>
+                      <Link className='navlinks' href='/myrecipes'> My Recipes </Link>
+                      <button className='navlinks' onClick={() => signOut()}> Sign out </button>
+                    </div>
               }
             </ul>
           </nav>
