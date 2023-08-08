@@ -13,6 +13,7 @@ function Navbar() {
   const session = useSession()
 
   const [isOpen, setIsOpen] = useState(false)
+  const [profileIsOpen, setProfileIsOpen] = useState(false)
   
   return (
     <div className='w-full h-20 shadow-md fixed top-0 bg-white z-10'>
@@ -24,7 +25,16 @@ function Navbar() {
             <Link className='navlinks' href='/recipedeck'> Recipes </Link>
             <Link className='navlinks' href='/about'> About </Link>
             {session?.data 
-              ? <button className='navlinks' type='button' onClick={() => signOut()}> {session.data?.user.name} </button>
+              ? <div className='flex flex-col'>
+                  <button className='text-[rgb(255,143,58)] hover:animate-pulse' type='button' onClick={() => setProfileIsOpen(prev => !prev)}> {session.data?.user.name} </button>
+                  {profileIsOpen && 
+                    <div className='flex flex-col w-fit bg-white shadow-lg p-4 items-start gap-4 border-[1px] rounded-md border-[rgb(255,143,58)] absolute right-0 top-20'>
+                      <CloseIcon className='hover:animate-pulse hover:text-gray-600 cursor-pointer' onClick={() => setProfileIsOpen((prev) => (!prev))}> x </CloseIcon>
+                      <Link className='navlinks' href='/myrecipes'> My Recipes </Link>
+                      <button className='navlinks' onClick={() => signOut()}> Sign out </button>
+                    </div>
+                  }   
+                </div>
               : <button className='navlinks' type='button' onClick={() => signIn()}> Sign in </button>
             }
           </ul>
@@ -39,7 +49,7 @@ function Navbar() {
               <Link className='navlinks' href='/recipedeck'> Recipes </Link>
               <Link className='navlinks' href='/about'> About </Link>
               {session?.data 
-              ? <button className='flex hover:text-[#F99648]' type='button' onClick={() => signOut()}> {session.data?.user.name} </button>
+              ? <button className='flex text-[rgb(255,143,58)]' type='button' onClick={() => setProfileIsOpen(prev => !prev)}> {session.data?.user.name} </button>
               : <button className='flex hover:text-[#F99648]' type='button' onClick={() => signIn()}> Sign in </button>
               }
             </ul>
