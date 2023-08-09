@@ -91,9 +91,9 @@ function AddRecipe() {
       <h1 className='text-2xl font-bold mt-4'> Add Recipe </h1>
       <form className='bg-white h-max w-[75%] sm:w-[35%] flex m-12 flex-col space-y-6 rounded-lg'>
         <label> Recipe Title </label>
-        <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='Title' onChange={(e) => setTitle(e.target.value)} required></input>
+        <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='Title' onChange={(e) => setTitle(e.target.value)} maxLength="45" required></input>
         <label> Description </label>
-        <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='Describe your dish in short' onChange={(e) => setDescription(e.target.value)} required></input>
+        <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='Describe your dish in short' onChange={(e) => setDescription(e.target.value)} maxLength="45" required></input>
         <label> Cook Time (in minutes) </label>
         <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='ex. 60' type='number' onChange={(e) => setCookTime(e.target.value)} onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()} required></input>
         <label> Ingredients </label>
