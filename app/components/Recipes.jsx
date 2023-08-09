@@ -9,7 +9,7 @@ function Recipes() {
     const { recipes } = useStoreContext()
 
     return (
-        <div className="grid grid-cols-4 gap-4 justify-items-center m-12"> 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-12"> 
         {recipes.map(res => 
             
             <div className="relative w-full h-fit mb-12 border border-gray-200 rounded-lg shadow-lg bg-white hover:scale-[1.01]">
