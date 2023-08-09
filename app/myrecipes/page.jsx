@@ -15,9 +15,7 @@ async function myrecipes() {
   })
 
   return (
-    <div className="h-full w-full flex justify-center">
       <MyRecipeDeck recipes={recipes} />
-    </div>
   )
 }
 
