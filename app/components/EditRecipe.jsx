@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, use } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@chimera-ui/components'
 import { Bounce } from "react-activity";
 import "react-activity/dist/library.css";
@@ -12,11 +12,19 @@ import 'react-quill/dist/quill.snow.css';
 import { UploadDropzone } from '../components/uploadthing';
 import ReactQuill from 'react-quill';
 import { useSession } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 
 
 function EditRecipe() {
+  const { setSuccessIcon, setBookSection, recipes } = useStoreContext();
+
+  const searchParams = useSearchParams();
+  const recipeID = searchParams.get('id')
+
   const session = useSession();
-  const [userid, setUserid] = useState(session.data.userid)
+  useEffect(() => {setUserid(session.data?.userid)}, [session]);
+  const [userid, setUserid] = useState()
+  
   const [title, setTitle] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [ingredientsArr, setIngredientsArr] = useState([])
@@ -27,8 +35,17 @@ function EditRecipe() {
   const [deleteImg, setDeleteImg] = useState(false)
   const [msg, setMsg] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [singleRecipe, setSingleRecipe] = useState([])
 
-  const { setSuccessIcon, setBookSection } = useStoreContext();
+  useEffect(() => {
+    const myRecipe = recipes.find(({id}) => id === Number(recipeID));
+    setSingleRecipe(myRecipe);
+  }); // empty dependency array to run only once after the first render
+
+
+  useEffect(() => {
+    setIngredientsArr(JSON.parse(singleRecipe?.ingredients ?? '[]'))
+  }, [singleRecipe])
 
   const handleSuccess = () => {
     setSuccessIcon(true)
@@ -90,11 +107,11 @@ function EditRecipe() {
       <h1 className='text-2xl font-bold mt-4'> Edit Recipe </h1>
       <form className='bg-white h-max w-[75%] sm:w-[35%] flex m-12 flex-col space-y-6 rounded-lg'>
         <label> Recipe Title </label>
-        <input className='border-[0.5px] border-black p-1 shadow-sm' value={'hey'} placeholder='Title' onChange={(e) => setTitle(e.target.value)} required></input>
+        <input className='border-[0.5px] border-black p-1 shadow-sm' defaultValue={singleRecipe?.name || ''} placeholder='Title' onChange={(e) => setTitle(e.target.value)} required></input>
         <label> Description </label>
-        <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='Describe your dish in short' onChange={(e) => setDescription(e.target.value)} required></input>
+        <input className='border-[0.5px] border-black p-1 shadow-sm' defaultValue={singleRecipe?.description || ''} placeholder='Describe your dish in short' onChange={(e) => setDescription(e.target.value)} required></input>
         <label> Cook Time (in minutes) </label>
-        <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='ex. 60' type='number' onChange={(e) => setCookTime(e.target.value)} onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()} required></input>
+        <input className='border-[0.5px] border-black p-1 shadow-sm' defaultValue={singleRecipe?.cooktime || ''} placeholder='ex. 60' type='number' onChange={(e) => setCookTime(e.target.value)} onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()} required></input>
         <label> Ingredients </label>
         <div className='flex relative items-center'>
           <input className='border-[0.5px] border-black p-1 shadow-sm w-full' placeholder='ex. 1lb chicken' value={ingredients} onChange={(e) => setIngredients(e.target.value)}></input>
@@ -111,7 +128,7 @@ function EditRecipe() {
         </ul>
         }
         <label> Instructions </label>
-        <ReactQuill className='' type='button' placeholder='Instructions' value={instructions} onChange={setInstructions} required></ReactQuill> 
+        {singleRecipe?.instructions && <ReactQuill defaultValue={singleRecipe?.instructions || ''} placeholder='Instructions' onChange={setInstructions} required></ReactQuill> }
         <label> Image </label>
         <div className='flex flex-col'>
           {!deleteImg &&
@@ -130,6 +147,12 @@ function EditRecipe() {
           <button onClick={() => handleDropImgUpload()}  type='button' className=' m-auto h-fit hover:underline text-blue-400 hover:scale-[1.02] px-2'> Remove/Upload </button>
         </div>
       </form>
+      {imgURL && 
+        <div className='flex flex-col items-center gap-2'>
+          <p> New Image </p>
+          <img className='mb-12 border-2 border-black h-full w-[20rem]' src={imgURL}></img> 
+        </div>
+        }
       <div className='flex mx-auto h-full'>
         {!isLoading &&
           <Button type='submit' className='h-[2rem]' onClick={sendRecipe}> Submit Recipe </Button>
@@ -137,7 +160,6 @@ function EditRecipe() {
           <Bounce className='h-[2rem]' />
         }
         </div>
-        <img src={imgURL}></img>
     </div>
 
     

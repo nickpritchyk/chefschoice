@@ -6,6 +6,7 @@ const prisma = new PrismaClient()
 
 export async function POST(req, res) {
     const data = await req.json()
+    console.log(data)
     const user = await prisma.recipebook.update({
         where: {
             name: data.title,
@@ -22,13 +23,4 @@ export async function POST(req, res) {
         }
     })
     return NextResponse.json({ message: 'Recipe Updated' })
-}
-
-export async function GET() {
-    const data = await prisma.recipebook.findMany({
-        include: {
-            users: true
-        }
-    })
-    return NextResponse.json(data)
 }

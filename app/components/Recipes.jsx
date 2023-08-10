@@ -14,9 +14,9 @@ function Recipes() {
         {recipes.map((res, key) => 
             
             <div key={res.id} className="w-[21rem] xl:w-[22rem] p-6 gap-8 hover:scale-[1.01]">
-                <div className="w-full h-full bg-gray-300 border-black border-[0.5px]">
+                <div className="w-full h-full bg-gray-300 rounded-md hover:shadow-xl shadow-lg">
                     <Link href={{ pathname: `/myrecipes/${res.id}`, query: { name: res.name}} } className="w-full">
-                        <img className="h-[15rem] w-full border-black border-b-[1px]" src={res.imgurl} alt='img' />
+                        <img className="h-[15rem] w-full" src={res.imgurl} alt='img' />
                     </Link>
                     <div className="h-[7rem] relative gap-4 bg-[rgb(255,140,52)] opacity-70 w-full">
                         <h5 className="absolute text-lg font-extrabold tracking-tight p-2">{res.name}</h5>
