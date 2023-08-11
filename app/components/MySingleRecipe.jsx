@@ -1,22 +1,14 @@
 'use client';
 
-import { useStoreContext } from '../Context/store'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-export default function MySingleRecipe({ recipeID }) {
+export default function MySingleRecipe({ singleRecipe }) {
     const [commentsOpen, setCommentsOpen] = useState(false)
 
     function isCommentsOpen() {
         setCommentsOpen((prev) => !prev)
     }
-
-    const { recipes, singleRecipe, setSingleRecipe } = useStoreContext()
-
-    useEffect(() => {
-        setSingleRecipe(recipes.find(({id}) => id === Number(recipeID)))
-    })
-
 
     return (
         <div className='bg-[#FAF1E5] w-[90vw] sm:w-[75vw] md:w-[65vw] lg:w-[45vw] h-fit p-16 flex m-8 shadow-md hover:shadow-lg'>

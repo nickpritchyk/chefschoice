@@ -12,18 +12,20 @@ import 'react-quill/dist/quill.snow.css';
 import { UploadDropzone } from '../components/uploadthing';
 import ReactQuill from 'react-quill';
 import { useSession } from 'next-auth/react';
+import { useRouter } from "next/navigation";
 import { useSearchParams } from 'next/navigation';
 
 
-function EditRecipe() {
-  const { setSuccessIcon, setBookSection, recipes } = useStoreContext();
+function EditRecipe({ recipes }) {
+  const router = useRouter()
+  const { setSuccessIcon } = useStoreContext();
 
   const searchParams = useSearchParams();
   const recipeID = searchParams.get('id')
 
   const session = useSession();
-  useEffect(() => {setUserid(session.data?.userid)}, [session]);
   const [userid, setUserid] = useState()
+  useEffect(() => {setUserid(session.data?.userid)}, [session]);
   
   const [title, setTitle] = useState('')
   const [ingredients, setIngredients] = useState('')
@@ -38,19 +40,28 @@ function EditRecipe() {
   const [singleRecipe, setSingleRecipe] = useState([])
 
   useEffect(() => {
-    const myRecipe = recipes.find(({id}) => id === Number(recipeID));
-    setSingleRecipe(myRecipe);
-  }); // empty dependency array to run only once after the first render
+    router.refresh()
+  }, [])
+
+  useEffect(() => {
+    setSingleRecipe(recipes.find(({id}) => id === Number(recipeID)));
+  })
 
 
   useEffect(() => {
     setIngredientsArr(JSON.parse(singleRecipe?.ingredients ?? '[]'))
+    setTitle(singleRecipe?.name)
+    setInstructions(singleRecipe?.instructions)
+    setCookTime(singleRecipe?.cooktime)
+    setDescription(singleRecipe?.description)
+    setImgURL(singleRecipe?.imgURL)
   }, [singleRecipe])
 
   const handleSuccess = () => {
     setSuccessIcon(true)
-    setBookSection(false)
+    router.push('/myrecipes')
     toast('Recipe Updated', { hideProgressBar: true, autoClose: 3000, type: 'success' })
+
   }
 
   const handleIngredientClick = () => {
@@ -76,10 +87,11 @@ function EditRecipe() {
 
   const sendRecipe = async (e) => {
     e.preventDefault();
+    console.log('STUFF: ', title, instructions, description, cookTime, userid)
     if(title && ingredientsArr && instructions && description && cookTime && userid) {
       setIsLoading(true)
     const ingredientsJSON = JSON.stringify(ingredientsArr)
-    await fetch('/api/EditRecipe', {
+    await fetch('/api/editrecipe', {
       method: 'POST',
       body: JSON.stringify({
         title,
@@ -88,7 +100,7 @@ function EditRecipe() {
         cookTime,
         instructions,
         imgURL,
-        userid,
+        recipeID
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
@@ -114,7 +126,7 @@ function EditRecipe() {
         <input className='border-[0.5px] border-black p-1 shadow-sm' defaultValue={singleRecipe?.cooktime || ''} placeholder='ex. 60' type='number' onChange={(e) => setCookTime(e.target.value)} onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()} required></input>
         <label> Ingredients </label>
         <div className='flex relative items-center'>
-          <input className='border-[0.5px] border-black p-1 shadow-sm w-full' placeholder='ex. 1lb chicken' value={ingredients} onChange={(e) => setIngredients(e.target.value)}></input>
+          <input className='border-[0.5px] border-black p-1 shadow-sm w-full' placeholder='ex. 1lb chicken' onChange={(e) => setIngredients(e.target.value)}></input>
           <button className='flex bg-[#F99648] hover:bg-[#ecb97a] rounded-md absolute right-1' type='button' onClick={handleIngredientClick}><AddIcon /></button>
         </div>
         {ingredientsArr.length > 0 &&
@@ -128,8 +140,12 @@ function EditRecipe() {
         </ul>
         }
         <label> Instructions </label>
-        {singleRecipe?.instructions && <ReactQuill defaultValue={singleRecipe?.instructions || ''} placeholder='Instructions' onChange={setInstructions} required></ReactQuill> }
-        <label> Image </label>
+        {singleRecipe?.instructions && 
+        <div>
+          <ReactQuill defaultValue={singleRecipe?.instructions || ''} placeholder='Instructions' onChange={setInstructions} required></ReactQuill> 
+        </div>
+          }
+        <label className='flex'> Image </label>
         <div className='flex flex-col'>
           {!deleteImg &&
             <UploadDropzone endpoint="imageUploader"
@@ -148,8 +164,8 @@ function EditRecipe() {
         </div>
       </form>
       {imgURL && 
-        <div className='flex flex-col items-center gap-2'>
-          <p> New Image </p>
+        <div className='items-center gap-2'>
+          <p> New Recipe Picture </p>
           <img className='mb-12 border-2 border-black h-full w-[20rem]' src={imgURL}></img> 
         </div>
         }

@@ -2,18 +2,21 @@
 
 import { createContext, useContext, useState } from 'react';
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export const StoreContext = createContext();
 
 export const StoreContextProvider = ({ children }) => {
+    const router = useRouter()
+    const path = usePathname()
     const [bookSection, setBookSection] = useState(false)
     const [successIcon, setSuccessIcon] = useState(null)
     const [recipes, setRecipes] = useState([])
     const [singleRecipe, setSingleRecipe] = useState([])
 
     useEffect(() => {
-        async function getRecipes() {
-            await fetch('http://localhost:3000/api/addrecipe', {cache: "no-store"})
+            fetch('http://localhost:3000/api/addrecipe', {cache: "no-store"})
                 .then(data => {
                     if (data.ok) {
                         return data.json();
@@ -23,9 +26,6 @@ export const StoreContextProvider = ({ children }) => {
                     .then((data) => {
                         setRecipes(data)
                     })
-                .then()
-        }
-        getRecipes()
     }, [])
 
     const contextValue = { bookSection, setBookSection, successIcon, setSuccessIcon, recipes, setRecipes, singleRecipe, setSingleRecipe }

@@ -1,15 +1,24 @@
 import MySingleRecipe from '../../components/MySingleRecipe'
 
+const { PrismaClient } = require('@prisma/client')
+const prisma = new PrismaClient()
+
 type Params = {
     params: {
         recipe: string
     }
 }
 
-function recipe({ params: {recipe}}: Params) {
+async function recipe({ params: {recipe}}: Params) {
+
+  const singleRecipe = await prisma.recipebook.findUnique({
+    where: {
+      id: parseInt(recipe)
+    }
+  })
   return (
     <div className='flex justify-center h-fit w-full'>
-      <MySingleRecipe recipeID={recipe}/>
+      <MySingleRecipe singleRecipe={singleRecipe}/>
     </div>
   )
 }

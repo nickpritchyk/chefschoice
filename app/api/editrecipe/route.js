@@ -6,11 +6,10 @@ const prisma = new PrismaClient()
 
 export async function POST(req, res) {
     const data = await req.json()
-    console.log(data)
+    console.log(data.name)
     const user = await prisma.recipebook.update({
         where: {
-            name: data.title,
-            userid: data.userid
+            id: parseInt(data.recipeID)
         },
         data: {
             name: data.title,
@@ -19,7 +18,6 @@ export async function POST(req, res) {
             cooktime: parseInt(data.cookTime),
             instructions: data.instructions,
             imgurl: data.imgURL,
-            userid: data.userid,
         }
     })
     return NextResponse.json({ message: 'Recipe Updated' })
