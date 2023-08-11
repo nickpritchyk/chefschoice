@@ -15,19 +15,6 @@ export const StoreContextProvider = ({ children }) => {
     const [recipes, setRecipes] = useState([])
     const [singleRecipe, setSingleRecipe] = useState([])
 
-    useEffect(() => {
-            fetch('http://localhost:3000/api/addrecipe', {cache: "no-store"})
-                .then(data => {
-                    if (data.ok) {
-                        return data.json();
-                      }
-                      throw new Error('Recipes not fetched, error');
-                    })
-                    .then((data) => {
-                        setRecipes(data)
-                    })
-    }, [])
-
     const contextValue = { bookSection, setBookSection, successIcon, setSuccessIcon, recipes, setRecipes, singleRecipe, setSingleRecipe }
 
     return(

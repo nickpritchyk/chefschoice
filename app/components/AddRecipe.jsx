@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, use } from 'react'
+import React, { useState } from 'react'
 import { Button } from '@chimera-ui/components'
 import { Bounce } from "react-activity";
 import "react-activity/dist/library.css";
