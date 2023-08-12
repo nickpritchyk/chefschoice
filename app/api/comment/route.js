@@ -11,6 +11,14 @@ export async function GET(req, res) {
 
 export async function POST(req, res) {
     const data = await req.json()
-    console.log(data)
-    return NextResponse.json(data)
+    const user = await prisma.comments.create({
+        data: {
+            rating: parseInt(data.rating),
+            likes: parseInt(data.likes),
+            comment: data.comment,
+            author: data.author,
+            authorid: parseInt(data.authorid)
+        }
+    })
+    return NextResponse.json( {message: 'Comment posted'} )
 }

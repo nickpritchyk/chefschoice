@@ -8,8 +8,8 @@ import { useSession } from 'next-auth/react';
 function Comments() {
     const session = useSession();
 
-    const [authorid, setAuthorId] = useState(session.data.userid)
-    const [author, setAuthor] = useState(session.data.user.name)
+    const [authorid, setAuthorId] = useState(session.data?.userid)
+    const [author, setAuthor] = useState(session.data?.user.name)
     const [comment, setComment] = useState('')
     const [likes, setLikes] = useState(0)
     const [rating, setRating] = useState(1)
