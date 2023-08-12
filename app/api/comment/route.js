@@ -16,8 +16,9 @@ export async function POST(req, res) {
             rating: parseInt(data.rating),
             likes: parseInt(data.likes),
             comment: data.comment,
+            recipeid: parseInt(data.recipeid),
             author: data.author,
-            authorid: parseInt(data.authorid)
+            authorid: parseInt(data.authorid),
         }
     })
     return NextResponse.json( {message: 'Comment posted'} )

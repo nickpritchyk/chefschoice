@@ -35,6 +35,7 @@ model comments {
   rating   Int
   comment  String @db.VarChar(280)
   likes    Int
+  recipeid Int
   author   String @db.VarChar(45)
   authorid Int
   users    users  @relation(fields: [authorid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "authorid")

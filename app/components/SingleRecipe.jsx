@@ -4,7 +4,7 @@ import { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Comments from '../components/Comments'
 
-export default function SingleRecipe({ singleRecipe }) {
+export default function SingleRecipe({ singleRecipe, comments, recipeid, singleRecipeComments }) {
     const [commentsOpen, setCommentsOpen] = useState(false)
 
     function isCommentsOpen() {
@@ -27,7 +27,7 @@ export default function SingleRecipe({ singleRecipe }) {
                         <ExpandMoreIcon onClick={() => {isCommentsOpen()}} style={{fontSize: '32px', cursor: 'pointer'}}/>
                     </div>
                     {commentsOpen && 
-                        <Comments />
+                        <Comments recipeid={recipeid} singleRecipeComments={singleRecipeComments}/>
                     }
                 </div>
             }

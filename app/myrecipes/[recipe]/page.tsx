@@ -16,9 +16,12 @@ async function recipe({ params: {recipe}}: Params) {
       id: parseInt(recipe)
     }
   })
+
+  const comments = await prisma.comments.findMany()
+
   return (
     <div className='flex justify-center h-fit w-full'>
-      <MySingleRecipe singleRecipe={singleRecipe}/>
+      <MySingleRecipe singleRecipe={singleRecipe} />
     </div>
   )
 }
