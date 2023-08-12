@@ -14,7 +14,8 @@ model recipebook {
   ingredients  Json
   cooktime     Int
   instructions String  @db.MediumText
-  imgurl       String? @db.VarChar(100)
+  imgurl       String? @db.VarChar(150)
+  author       String  @db.VarChar(45)
   userid       Int
   users        users   @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "userid")
 
@@ -31,6 +32,7 @@ model users {
 
 model comments {
   id       Int    @id
+  rating   String @db.VarChar(45)
   comment  String @db.VarChar(280)
   authorid Int
   users    users  @relation(fields: [authorid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "authorid")

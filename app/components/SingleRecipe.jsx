@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Comments from '../components/Comments'
 
 export default function SingleRecipe({ singleRecipe }) {
     const [commentsOpen, setCommentsOpen] = useState(false)
@@ -26,9 +27,7 @@ export default function SingleRecipe({ singleRecipe }) {
                         <ExpandMoreIcon onClick={() => {isCommentsOpen()}} style={{fontSize: '32px', cursor: 'pointer'}}/>
                     </div>
                     {commentsOpen && 
-                        <section>
-                            <p> Recent Comments </p>
-                        </section>
+                        <Comments />
                     }
                 </div>
             }

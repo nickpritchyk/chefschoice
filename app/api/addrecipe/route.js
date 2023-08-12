@@ -14,6 +14,7 @@ export async function POST(req, res) {
             cooktime: parseInt(data.cookTime),
             instructions: data.instructions,
             imgurl: data.imgURL,
+            author: data.author,
             userid: data.userid,
         }
     })

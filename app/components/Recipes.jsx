@@ -17,9 +17,9 @@ function Recipes({ recipes }) {
                         <img className="h-[15rem] w-full" src={res.imgurl} alt='img' />
                     </Link>
                     <div className="h-[7rem] relative gap-4 bg-[rgb(255,140,52)] opacity-70 w-full">
-                        <h5 className="absolute text-lg font-extrabold tracking-tight p-2">{res.name}</h5>
+                        <h1 className="text-lg font-extrabold tracking-tight p-2">{res.name}</h1>
+                        <h2 className="absolute top-6 text-lg font-extrabold tracking-tight p-2"> by {res.author || ''}</h2>
                         <div className="bottom-2 absolute flex gap-4 items-center w-full p-2">
-                            <button className="p-2 rounded-md" onClick={() => handleComment(res.id)}> <AddCommentOutlinedIcon style={{fontSize: '26px'}} /> </button>
                             <Link className="font-extrabold" href={{ pathname: `/recipedeck/${res.id}`, query: { name: res.name}} }>
                                 View More
                             </Link>

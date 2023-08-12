@@ -87,7 +87,6 @@ function EditRecipe({ recipes }) {
 
   const sendRecipe = async (e) => {
     e.preventDefault();
-    console.log('STUFF: ', title, instructions, description, cookTime, userid)
     if(title && ingredientsArr && instructions && description && cookTime && userid) {
       setIsLoading(true)
     const ingredientsJSON = JSON.stringify(ingredientsArr)
