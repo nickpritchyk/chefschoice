@@ -1,10 +1,11 @@
 'use client';
 
-
 import { Button } from '@chimera-ui/components'
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import StarIcon from '@mui/icons-material/Star';
+import Rating from '@mui/material/Rating';
 
 function Comments({ recipeid, singleRecipeComments }) {
     const router = useRouter()
@@ -14,11 +15,10 @@ function Comments({ recipeid, singleRecipeComments }) {
     const [author, setAuthor] = useState(session.data?.user.name)
     const [comment, setComment] = useState('')
     const [likes, setLikes] = useState(0)
-    const [rating, setRating] = useState(1)
+    const [rating, setRating] = useState(null)
 
     async function handleCommentSubmit(e) {
         e.preventDefault()
-        console.log('hey')
         await fetch('/api/comment', {
             method: 'POST',
             headers: {
@@ -38,22 +38,90 @@ function Comments({ recipeid, singleRecipeComments }) {
             } else {
                 router.refresh()
                 setComment('')
+                setRating('')
+                return res.json()
+            }
+        }) 
+    }
+
+    async function handleDelete(e, commentid) {
+        e.preventDefault()
+        await fetch('/api/comment/delete', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify({
+                commentid: commentid
+            })
+        }).then((res) => {
+            if(!res.ok) {
+                throw new error('Comment delete failed, error.')
+            } else {
+                router.refresh()
+                return res.json()
+            }
+        }) 
+    }
+
+    async function handleEdit(e, commentid) {
+        e.preventDefault()
+        await fetch('api/comment/edit', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify({
+                rating: rating,
+                commentid: commentid
+            })
+        }).then((res) => {
+            if(!res.ok) {
+                throw new error('Comment edit failed, error.')
+            } else {
+                setComment('')
+                setRating('')
+                router.refresh()
                 return res.json()
             }
         }) 
     }
 
   return (
-        <section className='w-[42rem] flex flex-col gap-4'>
-            <h1 className='mb-4'> Comments </h1>
-            <div>
-                {singleRecipeComments.map((res, key) => 
-                    <h1>{res.comment}</h1>
-                )}
+        <section className='flex flex-col gap-4'>
+            <div className='w-full h-fit flex flex-col gap-6'>
+                {(!singleRecipeComments.length == 0) ?
+                    singleRecipeComments.map((res, key) => 
+                        <div key={res.id} className='gap-2 flex flex-col bg-[#F5F5F5] rounded-md p-3 w-fit hover:shadow-sm'>
+                            <h1 className='font-extrabold text-lg'>{res.author}</h1>
+                            {!(res.rating == null) &&
+                                <p> <StarIcon style={{fontSize: '17px', color: '#F99648'}}/> {res.rating} </p>
+                            }
+                            <p>{res.comment}</p> 
+                            {(authorid == res.authorid) &&
+                                <div className='flex gap-4 mt-2'>
+                                    <button onClick={(e) => handleDelete(e, res.id)}> Delete </button>
+                                    <button onClick={(e) => handleEdit(e, res.id)}> Edit </button>
+                                </div>
+                            }
+                        </div>
+                ):
+                        <p> No comments </p>
+                }
             </div>
-            <h2> Post a comment </h2>
-            <textarea onChange={(e) => {setComment(e.target.value)}} value={comment} className='w-full rounded-md resize-none p-2 border-[1px] overflow-scroll border-primary' placeholder='Your comment'></textarea>
-            <Button type='submit' onClick={handleCommentSubmit} className='h-8'> Submit </Button>
+            <div className='flex flex-col gap-4 mt-6'>
+                <h2 className='font-extrabold'> Leave a comment </h2>
+                <label> Rating </label>
+                <Rating
+                    name="simple-controlled"
+                    value={rating}
+                    onChange={(event, newValue) => {
+                        setRating(newValue);
+                    }}
+                />
+                <textarea onChange={(e) => {setComment(e.target.value)}} value={comment} className='w-[14rem] sm:w-[20rem] md:w-[24rem] lg:w-[24rem] xl:w-[31rem] rounded-md resize-none p-2 border-[1px] overflow-scroll' placeholder='Your comment'></textarea>
+                <Button type='submit' onClick={handleCommentSubmit} className='h-8'> Submit </Button>
+            </div>
         </section>
   )
 }
