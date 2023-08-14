@@ -9,7 +9,7 @@ export async function POST(req, res) {
     console.log(data.name)
     const user = await prisma.recipebook.update({
         where: {
-            id: parseInt(data.recipeID)
+            recipeid: parseInt(data.recipeID)
         },
         data: {
             name: data.title,

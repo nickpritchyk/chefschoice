@@ -14,7 +14,6 @@ export async function POST(req, res) {
     const user = await prisma.comments.create({
         data: {
             rating: parseInt(data.rating),
-            likes: parseInt(data.likes),
             comment: data.comment,
             recipeid: parseInt(data.recipeid),
             author: data.author,

@@ -8,16 +8,17 @@ datasource db {
 }
 
 model recipebook {
-  id           Int     @id @default(autoincrement())
-  name         String  @db.VarChar(45)
-  description  String  @db.VarChar(45)
+  recipeid     Int        @id @default(autoincrement())
+  name         String     @db.VarChar(45)
+  description  String     @db.VarChar(45)
   ingredients  Json
   cooktime     Int
-  instructions String  @db.MediumText
-  imgurl       String? @db.VarChar(150)
-  author       String  @db.VarChar(45)
+  instructions String     @db.MediumText
+  imgurl       String?    @db.VarChar(150)
+  author       String     @db.VarChar(45)
   userid       Int
-  users        users   @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "userid")
+  comments     comments[]
+  users        users      @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "userid")
 
   @@index([userid], map: "userid_idx")
 }
@@ -31,13 +32,15 @@ model users {
 }
 
 model comments {
-  id       Int    @id @default(autoincrement())
-  rating   Int
-  comment  String @db.VarChar(280)
-  recipeid Int
-  author   String @db.VarChar(45)
-  authorid Int
-  users    users  @relation(fields: [authorid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "authorid")
+  id         Int        @id @default(autoincrement())
+  rating     Int
+  comment    String     @db.VarChar(280)
+  recipeid   Int
+  author     String     @db.VarChar(45)
+  authorid   Int
+  users      users      @relation(fields: [authorid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "authorid")
+  recipebook recipebook @relation(fields: [recipeid], references: [recipeid], onDelete: Cascade, onUpdate: NoAction, map: "comments_ibfk_1")
 
   @@index([authorid], map: "authorid_idx")
+  @@index([recipeid], map: "comments_ibfk_1")
 }

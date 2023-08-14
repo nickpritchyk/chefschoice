@@ -8,7 +8,7 @@ export async function POST(req) {
     const data = await req.json()
     const user = await prisma.recipebook.delete({
         where: {
-            id: parseInt(data.id)
+            recipeid: parseInt(data.id)
         },
     })
     return NextResponse.json({ message: 'Recipe Deleted' })

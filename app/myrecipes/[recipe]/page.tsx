@@ -13,7 +13,7 @@ async function recipe({ params: {recipe}}: Params) {
 
   const singleRecipe = await prisma.recipebook.findUnique({
     where: {
-      id: parseInt(recipe)
+      recipeid: parseInt(recipe)
     }
   })
 

@@ -91,7 +91,7 @@ function Comments({ recipeid, singleRecipeComments }) {
 
 
   return (
-        <section className='flex flex-col gap-4'>
+        <section className='w-fit h-fit flex flex-col gap-4'>
             <div className='w-full h-fit flex flex-col gap-6'>
                 {(!singleRecipeComments.length == 0) ?
                     singleRecipeComments.map((res, key) => 
