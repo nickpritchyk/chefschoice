@@ -21,7 +21,8 @@ export default function SingleRecipe({ singleRecipe, comments, recipeid, singleR
                         <StarIcon style={{color: '#F99648'}}/>
                     </button>
                     <section className='flex flex-col gap-8'>
-                        <h1 className='text-3xl font-bold border-b-2 border-primary p-2'> {singleRecipe.name} </h1>
+                        <h1 className='text-3xl font-bold'> {singleRecipe.name} </h1>
+                        <h2 className='text-2xl font-bold border-b-2 border-primary pb-2'> by {singleRecipe.author} </h2>
                         <img src={singleRecipe.imgurl}></img>
                         <p className='font-semibold'> {singleRecipe.description} </p>
                         <label className='font-extrabold text-xl'> Ingredients </label>

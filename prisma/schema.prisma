@@ -34,7 +34,6 @@ model comments {
   id       Int    @id @default(autoincrement())
   rating   Int
   comment  String @db.VarChar(280)
-  likes    Int
   recipeid Int
   author   String @db.VarChar(45)
   authorid Int

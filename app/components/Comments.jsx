@@ -1,11 +1,12 @@
 'use client';
 
 import { Button } from '@chimera-ui/components'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import StarIcon from '@mui/icons-material/Star';
 import Rating from '@mui/material/Rating';
+import EditModal from '../components/EditModal'
 
 function Comments({ recipeid, singleRecipeComments }) {
     const router = useRouter()
@@ -14,8 +15,10 @@ function Comments({ recipeid, singleRecipeComments }) {
     const [authorid, setAuthorId] = useState(session.data?.userid)
     const [author, setAuthor] = useState(session.data?.user.name)
     const [comment, setComment] = useState('')
-    const [likes, setLikes] = useState(0)
-    const [rating, setRating] = useState(null)
+    const [rating, setRating] = useState(0)
+    const [editIsOpen, setEditIsOpen] = useState(false)
+
+    console.log(comment, rating)
 
     async function handleCommentSubmit(e) {
         e.preventDefault()
@@ -27,7 +30,6 @@ function Comments({ recipeid, singleRecipeComments }) {
             body: JSON.stringify({
                 comment: comment,
                 rating: rating,
-                likes: likes,
                 author: author,
                 authorid: authorid,
                 recipeid: recipeid
@@ -87,12 +89,13 @@ function Comments({ recipeid, singleRecipeComments }) {
         }) 
     }
 
+
   return (
         <section className='flex flex-col gap-4'>
             <div className='w-full h-fit flex flex-col gap-6'>
                 {(!singleRecipeComments.length == 0) ?
                     singleRecipeComments.map((res, key) => 
-                        <div key={res.id} className='gap-2 flex flex-col bg-[#F5F5F5] rounded-md p-3 w-fit hover:shadow-sm'>
+                        <div key={res.id} className='gap-2 flex flex-col bg-[#F0F0F0] rounded-md p-3 w-fit hover:shadow-md'>
                             <h1 className='font-extrabold text-lg'>{res.author}</h1>
                             {!(res.rating == null) &&
                                 <p> <StarIcon style={{fontSize: '17px', color: '#F99648'}}/> {res.rating} </p>
@@ -101,7 +104,10 @@ function Comments({ recipeid, singleRecipeComments }) {
                             {(authorid == res.authorid) &&
                                 <div className='flex gap-4 mt-2'>
                                     <button onClick={(e) => handleDelete(e, res.id)}> Delete </button>
-                                    <button onClick={(e) => handleEdit(e, res.id)}> Edit </button>
+                                    <button onClick={() => setEditIsOpen(prev => !prev)}> Edit </button>
+                                    {editIsOpen && 
+                                        <EditModal commentid={res.id} currComment={res.comment} currRating={res.rating} setEditIsOpen={setEditIsOpen} editIsOpen={editIsOpen} />
+                                    }
                                 </div>
                             }
                         </div>
