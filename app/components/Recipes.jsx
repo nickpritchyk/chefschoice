@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import AddCommentOutlinedIcon from '@mui/icons-material/AddCommentOutlined';
 import StarIcon from '@mui/icons-material/Star';
 
 

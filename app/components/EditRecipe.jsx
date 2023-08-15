@@ -44,7 +44,7 @@ function EditRecipe({ recipes }) {
   }, [])
 
   useEffect(() => {
-    setSingleRecipe(recipes.find(({id}) => id === Number(recipeID)));
+    setSingleRecipe(recipes.find(({recipeid}) => recipeid === Number(recipeID)));
   })
 
 

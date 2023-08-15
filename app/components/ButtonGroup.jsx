@@ -19,12 +19,9 @@ function ButtonGroup() {
   }
 
   return (
-    <div className='flex w-full sm:ml-24 items-center flex-col space-y-4 py-2 sm:w-full sm:space-x-12 sm:flex-row sm:space-y-0'>
+    <div className='flex sm:ml-24 items-center justify-center flex-col space-y-4 py-2 sm:w-full sm:space-x-12 sm:flex-row sm:space-y-0'>
         <Button onClick={() => {handleClick()}}>
             Add Recipe
-        </Button>
-        <Button>
-            <Link href='/updaterecipe'> Edit Recipe </Link>
         </Button>
     </div>
   )
