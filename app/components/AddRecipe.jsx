@@ -43,7 +43,6 @@ function AddRecipe() {
 
   async function deleteThing(e) {
     e.preventDefault()
-    console.log(imgURL.fileKey)
     await fetch('/api/deleteFileUpload', {
       method: 'POST',
       headers: {
@@ -91,7 +90,7 @@ function AddRecipe() {
 
   const sendRecipe = async (e) => {
     e.preventDefault();
-    if(title && ingredientsArr && instructions && description && cookTime && userid && author) {
+    if(title && ingredientsArr && instructions && description && cookTime && userid && author && imgURL) {
       setIsLoading(true)
     const ingredientsJSON = JSON.stringify(ingredientsArr)
     await fetch('/api/addrecipe', {
@@ -115,7 +114,7 @@ function AddRecipe() {
       handleSuccess()
       })
     } else {
-      alert('Please fill out all input fields.')
+      alert('Please fill out all input fields and add an image.')
     }}
     
   return (
@@ -162,10 +161,16 @@ function AddRecipe() {
               }}
             />
           }
-          {imgURL.fileUrl?.length > 0 && 
+          {imgURL && 
             <div className='flex flex-col justify-center items-center p-4'>
               <p className='text-md text-gray-700'> Upload the wrong image? </p>
               <button onClick={deleteThing}  type='button' className=' m-auto h-fit hover:underline text-blue-400 hover:scale-[1.02] px-2'> Remove upload </button>
+              {imgURL.fileUrl && 
+                <div className='items-center gap-2 flex flex-col justify-center mt-8'>
+                  <p> Recipe Picture </p>
+                  <img className='mb-8 border-[1px] border-black h-full w-[20rem]' src={imgURL.fileUrl}></img> 
+                </div>
+              }
             </div>
           }
         </div>
@@ -177,7 +182,6 @@ function AddRecipe() {
           <Bounce className='h-[2rem]' />
         }
         </div>
-        <img src={imgURL.fileUrl}></img>
     </div>
 
     

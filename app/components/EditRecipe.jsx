@@ -73,8 +73,25 @@ function EditRecipe({ recipes }) {
     }
   }
 
-  const handleDropImgUpload = () => {
-    setDeleteImg((prev) => !prev)
+  async function deleteThing(e) {
+    e.preventDefault()
+    console.log(imgURL.fileKey)
+    await fetch('/api/deleteFileUpload', {
+      method: 'POST',
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify({
+        fileKey: imgURL.fileKey
+      })
+    }).then(res => {
+      if(!res.ok) {
+        throw new error('ERROR, image delete failed')
+      } else {
+        setImgURL('')
+        router.refresh()
+      }
+    })
   }
 
   const handleDeleteIngredient = (deletingIngredient) => {
@@ -98,7 +115,7 @@ function EditRecipe({ recipes }) {
         ingredientsJSON,
         cookTime,
         instructions,
-        imgURL,
+        imgURL: imgURL.fileUrl,
         recipeID
       }),
       headers: {
@@ -145,27 +162,39 @@ function EditRecipe({ recipes }) {
         </div>
           }
         <label className='flex'> Image </label>
+        <p className='text-xs text-gray-700'> Add the wrong image to the dropzone? Simply choose another file. </p>
         <div className='flex flex-col'>
           {!deleteImg &&
-            <UploadDropzone endpoint="imageUploader"
-              onClientUploadComplete={(res) => {
-                // Do something with the response
-                setImgURL(res[0].fileUrl)
-                toast('Upload Successfull', { hideProgressBar: true, autoClose: 2000, type: 'success' })
-              }}
-              onUploadError={(error) => {
-                // Do something with the error.
-                alert(`ERROR! ${error.message}`);
-              }}
-            />
+            <UploadDropzone className='bg-red-400' endpoint="imageUploader"
+            onClientUploadComplete={(res) => {
+              // Do something with the response
+              console.log('file upload thing: ', res)
+              setImgURL(res[0])
+              toast('Upload Successfull', { hideProgressBar: true, autoClose: 2000, type: 'success' })
+            }}
+            onUploadError={(error) => {
+              // Do something with the error.
+              alert(`ERROR! ${error.message}`);
+            }}
+          />
           }
-          <button onClick={() => handleDropImgUpload()}  type='button' className=' m-auto h-fit hover:underline text-blue-400 hover:scale-[1.02] px-2'> Remove/Upload </button>
+          {imgURL && 
+            <div className='flex flex-col justify-center items-center p-4'>
+              <p className='text-md text-gray-700'> Upload the wrong image? </p>
+              <button onClick={deleteThing}  type='button' className=' m-auto h-fit hover:underline text-blue-400 hover:scale-[1.02] px-2'> Remove upload </button>
+            </div>
+          }
         </div>
       </form>
-      {imgURL && 
-        <div className='items-center gap-2'>
+      {imgURL ? 
+        <div className='items-center gap-2 flex flex-col justify-center'>
           <p> New Recipe Picture </p>
-          <img className='mb-12 border-2 border-black h-full w-[20rem]' src={imgURL}></img> 
+          <img className='mb-12 border-[1px] border-black h-full w-[20rem]' src={imgURL.fileUrl}></img> 
+        </div>
+        :
+        <div className='items-center gap-2 flex flex-col justify-center'>
+          <p> Current Recipe Picture </p>
+          <img className='mb-12 border-[1px] border-black h-full w-[20rem]' src={singleRecipe?.imgurl}></img> 
         </div>
         }
       <div className='flex mx-auto h-full'>
