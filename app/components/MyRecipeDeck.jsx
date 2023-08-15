@@ -8,14 +8,16 @@ import { Button } from '@chimera-ui/components'
 export default function MyRecipeDeck({ recipes }) {
     const router = useRouter()
 
-    async function handleDelete(id) {
-        const deleteRes = fetch('/api/deleterecipe', {
+    async function handleDelete(id, imgkey) {
+        console.log(imgkey)
+        const deleteRes = await fetch('/api/deleterecipe', {
             method: 'POST',
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             },
             body: JSON.stringify({
-                recipeid: id
+                recipeid: id,
+                imgkey: imgkey
             })
         })
         .then((res) => {
@@ -51,7 +53,7 @@ export default function MyRecipeDeck({ recipes }) {
                             <h5 className="absolute text-lg font-extrabold tracking-tight p-2">{res.name}</h5>
                             <div className="bottom-2 absolute flex gap-4 items-center w-full p-2">
                                 <Link href={{ pathname: `/updaterecipe/${res.recipeid}`, query: { id: res.recipeid } }}> Edit </Link>
-                                <button className="" onClick={() => {handleDelete(res.recipeid)}}> Delete </button>
+                                <button className="" onClick={() => {handleDelete(res.recipeid, res.imgkey)}}> Delete </button>
                                 <Link className="font-extrabold" href={{ pathname: `/myrecipes/${res.recipeid}`, query: { name: res.name}} }>
                                     View
                                 </Link>

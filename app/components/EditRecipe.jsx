@@ -116,6 +116,7 @@ function EditRecipe({ recipes }) {
         cookTime,
         instructions,
         imgURL: imgURL.fileUrl,
+        imgkey: imgURL.fileKey,
         recipeID
       }),
       headers: {

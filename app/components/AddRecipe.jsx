@@ -25,8 +25,6 @@ function AddRecipe() {
     setAuthor(session.data?.user.name)
   })
 
-  console.log(userid)
-
   const [title, setTitle] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [ingredientsArr, setIngredientsArr] = useState([])
@@ -102,6 +100,7 @@ function AddRecipe() {
         cookTime,
         instructions,
         imgURL: imgURL.fileUrl,
+        imgkey: imgURL.fileKey,
         author,
         userid
       }),
@@ -110,6 +109,7 @@ function AddRecipe() {
       },
     }).then(res =>
       res.json()).then((data) => {setMsg(data.message)
+      router.refresh()
       setIsLoading(false)
       handleSuccess()
       })

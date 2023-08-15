@@ -14,7 +14,8 @@ model recipebook {
   ingredients  Json
   cooktime     Int
   instructions String     @db.MediumText
-  imgurl       String?    @db.VarChar(150)
+  imgurl       String?    @db.VarChar(200)
+  imgkey       String?    @db.VarChar(200)
   author       String     @db.VarChar(45)
   userid       Int
   comments     comments[]

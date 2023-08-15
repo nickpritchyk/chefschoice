@@ -18,6 +18,7 @@ export async function POST(req, res) {
             cooktime: parseInt(data.cookTime),
             instructions: data.instructions,
             imgurl: data.imgURL,
+            imgkey: data.imgkey,
         }
     })
     return NextResponse.json({ message: 'Recipe Updated' })
