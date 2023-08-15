@@ -54,7 +54,6 @@ function EditRecipe({ recipes }) {
     setInstructions(singleRecipe?.instructions)
     setCookTime(singleRecipe?.cooktime)
     setDescription(singleRecipe?.description)
-    setImgURL(singleRecipe?.imgURL)
   }, [singleRecipe])
 
   const handleSuccess = () => {
@@ -102,8 +101,29 @@ function EditRecipe({ recipes }) {
     }
   }
 
+  async function deleteOldImg(imgkey) {
+    await fetch('/api/deleteFileUpload', {
+      method: 'POST',
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify({
+        fileKey: imgkey
+      })
+    }).then(res => {
+      if(!res.ok) {
+        throw new error('Old image delete failed, ERROR')
+      } else {
+        return res.json()
+      }
+    })
+  }
+
   const sendRecipe = async (e) => {
     e.preventDefault();
+    if(imgURL) {
+      deleteOldImg(singleRecipe?.imgkey)
+    }
     if(title && ingredientsArr && instructions && description && cookTime && userid) {
       setIsLoading(true)
     const ingredientsJSON = JSON.stringify(ingredientsArr)
@@ -115,8 +135,8 @@ function EditRecipe({ recipes }) {
         ingredientsJSON,
         cookTime,
         instructions,
-        imgURL: imgURL.fileUrl,
-        imgkey: imgURL.fileKey,
+        imgURL: imgURL.fileUrl || singleRecipe?.imgurl,
+        imgkey: imgURL.fileKey || singleRecipe?.imgkey,
         recipeID
       }),
       headers: {
@@ -187,7 +207,7 @@ function EditRecipe({ recipes }) {
           }
         </div>
       </form>
-      {imgURL ? 
+      {imgURL.fileUrl?.length > 0 ? 
         <div className='items-center gap-2 flex flex-col justify-center'>
           <p> New Recipe Picture </p>
           <img className='mb-12 border-[1px] border-black h-full w-[20rem]' src={imgURL.fileUrl}></img> 

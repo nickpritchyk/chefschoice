@@ -20,7 +20,8 @@ export default function MySingleRecipe({ singleRecipe }) {
                 "Content-type": "application/json; charset=UTF-8"
             },
             body: JSON.stringify({
-                recipeid: id
+                recipeid: id,
+                imgkey: imgkey
             })
         })
         .then((res) => {
