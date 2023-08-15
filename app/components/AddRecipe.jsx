@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@chimera-ui/components'
 import { Bounce } from "react-activity";
 import "react-activity/dist/library.css";
@@ -14,12 +14,19 @@ import ReactQuill from 'react-quill';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-
 function AddRecipe() {
   const router = useRouter()
   const session = useSession();
-  const [userid, setUserid] = useState(session.data?.userid)
-  const [author, setAuthor] = useState(session.data?.user.name)
+  const [userid, setUserid] = useState()
+  const [author, setAuthor] = useState()
+
+  useEffect(() => {
+    setUserid(session.data?.userid)
+    setAuthor(session.data?.user.name)
+  })
+
+  console.log(userid)
+
   const [title, setTitle] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [ingredientsArr, setIngredientsArr] = useState([])
@@ -31,7 +38,7 @@ function AddRecipe() {
   const [msg, setMsg] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  const { setSuccessIcon, setBookSection } = useStoreContext();
+  const { setSuccessIcon} = useStoreContext()
 
 
   async function deleteThing(e) {
@@ -57,7 +64,7 @@ function AddRecipe() {
 
   const handleSuccess = () => {
     setSuccessIcon(true)
-    setBookSection(false)
+    router.push('/recipedeck')
     toast('Recipe Added', { hideProgressBar: true, autoClose: 3000, type: 'success' })
   }
 
@@ -95,7 +102,7 @@ function AddRecipe() {
         ingredientsJSON,
         cookTime,
         instructions,
-        imgURL,
+        imgURL: imgURL.fileUrl,
         author,
         userid
       }),
@@ -142,7 +149,7 @@ function AddRecipe() {
         <p className='text-xs text-gray-700'> Add the wrong image to the dropzone? Simply choose another file. </p>
         <div className='flex flex-col'>
           {!deleteImg &&
-            <UploadDropzone appearance={{uploadIcon: 'bg-red-400'}} endpoint="imageUploader"
+            <UploadDropzone className='bg-red-400' endpoint="imageUploader"
               onClientUploadComplete={(res) => {
                 // Do something with the response
                 console.log('file upload thing: ', res)

@@ -1,9 +1,9 @@
+import "@uploadthing/react/styles.css";
 import './globals.css'
 import Navbar from './components/Navbar'
 import { StoreContextProvider } from './Context/store'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import "@uploadthing/react/styles.css";
 import { PT } from './fonts'
 import AuthProvider from './components/AuthProvider';
 

@@ -8,14 +8,11 @@ import { usePathname } from 'next/navigation';
 export const StoreContext = createContext();
 
 export const StoreContextProvider = ({ children }) => {
-    const router = useRouter()
-    const path = usePathname()
-    const [bookSection, setBookSection] = useState(false)
     const [successIcon, setSuccessIcon] = useState(null)
     const [recipes, setRecipes] = useState([])
     const [singleRecipe, setSingleRecipe] = useState([])
 
-    const contextValue = { bookSection, setBookSection, successIcon, setSuccessIcon, recipes, setRecipes, singleRecipe, setSingleRecipe }
+    const contextValue = {  successIcon, setSuccessIcon, recipes, setRecipes, singleRecipe, setSingleRecipe }
 
     return(
         <StoreContext.Provider value={contextValue}>

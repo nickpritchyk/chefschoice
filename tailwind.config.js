@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-const { withUt } = require("uploadthing/tw");
 
-module.exports = withUT({
+module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -11,4 +10,4 @@ module.exports = withUT({
   plugins: [
     require("@chimera-ui/tw-plugin"),
   ],
-});
+};
