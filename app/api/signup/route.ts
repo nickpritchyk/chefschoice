@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { fieldEncryptionMiddleware } from 'prisma-field-encryption'
+import { hash } from 'bcrypt';
 
 const { PrismaClient } = require('@prisma/client')
 
@@ -8,6 +9,7 @@ prisma.$use(fieldEncryptionMiddleware())
 
 export async function POST(req: Request, res: Response) {
     const data = await req.json()
+    const password = await hash(data.password, 12)
     const notUnique = await prisma.users.findUnique({
         where: {
             username: data.username
@@ -21,7 +23,7 @@ export async function POST(req: Request, res: Response) {
         await prisma.users.create({
             data: {
                 username: data.username,
-                password: data.password,
+                password: password,
             }
         })
         return new Response(JSON.stringify('Account successfully created'))

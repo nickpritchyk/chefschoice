@@ -61,7 +61,7 @@ function AddRecipe() {
 
   const handleSuccess = () => {
     setSuccessIcon(true)
-    router.push('/recipedeck')
+    router.push('/myrecipes')
     toast('Recipe Added', { hideProgressBar: true, autoClose: 3000, type: 'success' })
   }
 

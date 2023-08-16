@@ -1,6 +1,7 @@
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
+import { compare } from "bcrypt"
 
 const prisma = new PrismaClient()
 
@@ -29,7 +30,12 @@ export const options = {
 
                 if(!user) return null
 
-                if(credentials?.password !== user.password) {
+                const isPasswordValid = await compare(
+                    credentials?.password,
+                    user.password
+                )
+
+                if(!isPasswordValid) {
                     return null
                 } else {
                     return {

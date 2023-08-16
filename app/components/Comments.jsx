@@ -8,7 +8,7 @@ import StarIcon from '@mui/icons-material/Star';
 import Rating from '@mui/material/Rating';
 import EditModal from '../components/EditModal'
 
-function Comments({ recipeid, singleRecipeComments }) {
+function Comments({ recipeid, singleRecipeComments, isMyRecipe }) {
     const router = useRouter()
     const session = useSession();
 
@@ -115,19 +115,21 @@ function Comments({ recipeid, singleRecipeComments }) {
                         <p> No comments </p>
                 }
             </div>
-            <div className='flex flex-col gap-4 mt-6'>
-                <h2 className='font-extrabold'> Leave a comment </h2>
-                <label> Rating </label>
-                <Rating
-                    name="simple-controlled"
-                    value={rating}
-                    onChange={(event, newValue) => {
-                        setRating(newValue);
-                    }}
-                />
-                <textarea onChange={(e) => {setComment(e.target.value)}} value={comment} className='w-[14rem] sm:w-[20rem] md:w-[24rem] lg:w-[24rem] xl:w-[31rem] rounded-md resize-none p-2 border-[1px] overflow-scroll' placeholder='Your comment'></textarea>
-                <Button type='submit' onClick={handleCommentSubmit} className='h-8'> Submit </Button>
-            </div>
+            {!isMyRecipe &&
+                <div className='flex flex-col gap-4 mt-6'>
+                    <h2 className='font-extrabold'> Leave a comment </h2>
+                    <label> Rating </label>
+                    <Rating
+                        name="simple-controlled"
+                        value={rating}
+                        onChange={(event, newValue) => {
+                            setRating(newValue);
+                        }}
+                    />
+                    <textarea onChange={(e) => {setComment(e.target.value)}} value={comment} className='w-[14rem] sm:w-[20rem] md:w-[24rem] lg:w-[24rem] xl:w-[31rem] rounded-md resize-none p-2 border-[1px] overflow-scroll' placeholder='Your comment'></textarea>
+                    <Button type='submit' onClick={handleCommentSubmit} className='h-8'> Submit </Button>
+                </div>
+            }
         </section>
   )
 }

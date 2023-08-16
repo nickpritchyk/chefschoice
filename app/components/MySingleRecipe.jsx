@@ -4,8 +4,9 @@ import { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
+import Comments from '../components/Comments'
 
-export default function MySingleRecipe({ singleRecipe }) {
+export default function MySingleRecipe({ singleRecipe, singleRecipeComments }) {
     const [commentsOpen, setCommentsOpen] = useState(false)
     const router = useRouter()
 
@@ -13,7 +14,7 @@ export default function MySingleRecipe({ singleRecipe }) {
         setCommentsOpen((prev) => !prev)
     }
 
-    async function handleDelete(id) {
+    async function handleDelete(id, imgkey) {
         const deleteRes = fetch('/api/deleterecipe', {
             method: 'POST',
             headers: {
@@ -28,6 +29,7 @@ export default function MySingleRecipe({ singleRecipe }) {
             if(!res.ok) {
                 throw new error('delete failed')
             } else {
+                router.push('/myrecipes')
                 router.refresh()
                 return res.json()
             }
@@ -35,28 +37,33 @@ export default function MySingleRecipe({ singleRecipe }) {
     }
 
     return (
-        <div className='bg-[#FAF1E5] w-[90vw] sm:w-[75vw] md:w-[65vw] lg:w-[45vw] h-fit p-16 flex m-8 shadow-md hover:shadow-lg'>
+        <div className='w-[90vw] sm:w-[75vw] md:w-[65vw] lg:w-[45vw] h-fit p-16 flex m-8 shadow-md hover:shadow-lg'>
             {singleRecipe && 
-                <div className='flex flex-col gap-12 w-full'>
+                <div className='w-full relative flex flex-col gap-12'>
                     <div className='flex gap-6 w-full border-b-[1px] border-black p-2'>
                         <Link href={{ pathname: `/updaterecipe/${singleRecipe.recipeid}`, query: { id:  singleRecipe.recipeid} }}> Edit </Link>
-                        <button className="" onClick={() => {handleDelete(singleRecipe.recipeid)}}> Delete </button>
+                        <button className="" onClick={() => {handleDelete(singleRecipe.recipeid, singleRecipe.imgkey)}}> Delete </button>
                     </div>
-                    <section className='flex flex-col gap-8'>
+                    <section className='w-full flex flex-col gap-8'>
                         <h1 className='text-3xl font-bold'> {singleRecipe.name} </h1>
+                        <img src={singleRecipe.imgurl}></img>
                         <p className='font-semibold'> {singleRecipe.description} </p>
-                        <p> {singleRecipe.ingredients} </p>
-                        <h2 className=''> Instructions </h2>
-                        <section dangerouslySetInnerHTML={{__html: singleRecipe.instructions}}></section>
+                        <label className='font-extrabold text-xl'> Ingredients </label>
+                        <section className='w-fit rounded-md flex flex-col gap-4'>
+                            {((singleRecipe.ingredients).slice(1, -1)).split(',').map((ing) => 
+                                <p>{(ing).slice(1, -1)}</p>
+                            )}
+                        </section>
+                        <h2 className='font-extrabold text-xl'> Instructions </h2>
+                        <section style={{fontSize: '18px'}} dangerouslySetInnerHTML={{__html: singleRecipe.instructions}}></section>
                     </section>
                     <div className='flex flex-row gap-2'>
                         <h1 className='text-xl font-bold'> Comments </h1>
                         <ExpandMoreIcon onClick={() => {isCommentsOpen()}} style={{fontSize: '32px', cursor: 'pointer'}}/>
                     </div>
                     {commentsOpen && 
-                        <section>
-                            <p> Recent Comments </p>
-                        </section>
+                        <Comments recipeid={singleRecipe.recipeid} singleRecipeComments={singleRecipeComments} isMyRecipe={true}/>
+
                     }
                 </div>
             }

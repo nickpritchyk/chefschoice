@@ -152,7 +152,7 @@ function EditRecipe({ recipes }) {
     }}
     
   return (
-    <div className="flex flex-col w-full items-center mb-24">
+    <div className="flex flex-col w-full items-center mb-24 mt-12">
       <h1 className='text-2xl font-bold mt-4'> Edit Recipe </h1>
       <form className='bg-white h-max w-[75%] sm:w-[35%] flex m-12 flex-col space-y-6 rounded-lg'>
         <label> Recipe Title </label>
@@ -163,7 +163,7 @@ function EditRecipe({ recipes }) {
         <input className='border-[0.5px] border-black p-1 shadow-sm' defaultValue={singleRecipe?.cooktime || ''} placeholder='ex. 60' type='number' onChange={(e) => setCookTime(e.target.value)} onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()} required></input>
         <label> Ingredients </label>
         <div className='flex relative items-center'>
-          <input className='border-[0.5px] border-black p-1 shadow-sm w-full' placeholder='ex. 1lb chicken' onChange={(e) => setIngredients(e.target.value)}></input>
+          <input className='border-[0.5px] border-black p-1 shadow-sm w-full' placeholder='ex. 1lb chicken' value={ingredients} onChange={(e) => setIngredients(e.target.value)}></input>
           <button className='flex bg-[#F99648] hover:bg-[#ecb97a] rounded-md absolute right-1' type='button' onClick={handleIngredientClick}><AddIcon /></button>
         </div>
         {ingredientsArr.length > 0 &&

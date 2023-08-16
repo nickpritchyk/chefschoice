@@ -32,7 +32,7 @@ export default function SingleRecipe({ singleRecipe, comments, recipeid, singleR
                             )}
                         </section>
                         <h2 className='font-extrabold text-xl'> Instructions </h2>
-                        <section dangerouslySetInnerHTML={{__html: singleRecipe.instructions}}></section>
+                        <section style={{fontSize: '18px'}} dangerouslySetInnerHTML={{__html: singleRecipe.instructions}}></section>
                     </section>
                     <div className='flex flex-row gap-2'>
                         <h1 className='text-xl font-bold'> Comments </h1>

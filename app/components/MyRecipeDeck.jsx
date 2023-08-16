@@ -35,7 +35,7 @@ export default function MyRecipeDeck({ recipes }) {
         {recipes.length == 0 ?
             <div className="absolute flex flex-col gap-8 items-center">
                 <h1 className="font-extrabold text-2xl mt-24"> You have no recipes. </h1>
-                <Link href={'/book'}>
+                <Link href={'/addrecipe'}>
                     <Button> Make your first post here </Button>
                 </Link>
             </div>

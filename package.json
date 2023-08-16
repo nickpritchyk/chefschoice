@@ -27,7 +27,7 @@
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "axois": "^0.0.1-security",
-    "bcrypt": "^5.1.0",
+    "bcrypt": "^5.1.1",
     "next": "13.4.7",
     "next-auth": "^4.22.1",
     "postcss": "8.4.24",
@@ -47,6 +47,7 @@
     "uploadthing": "^5.1.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "daisyui": "^3.2.1",
     "prisma": "^4.16.2"
   }
