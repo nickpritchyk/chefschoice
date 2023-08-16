@@ -115,7 +115,7 @@ function Comments({ recipeid, singleRecipeComments, isMyRecipe }) {
                         <p> No comments </p>
                 }
             </div>
-            {!isMyRecipe &&
+            {(!isMyRecipe && session.data) &&
                 <div className='flex flex-col gap-4 mt-6'>
                     <h2 className='font-extrabold'> Leave a comment </h2>
                     <label> Rating </label>
@@ -126,9 +126,12 @@ function Comments({ recipeid, singleRecipeComments, isMyRecipe }) {
                             setRating(newValue);
                         }}
                     />
-                    <textarea onChange={(e) => {setComment(e.target.value)}} value={comment} className='w-[14rem] sm:w-[20rem] md:w-[24rem] lg:w-[24rem] xl:w-[31rem] rounded-md resize-none p-2 border-[1px] overflow-scroll' placeholder='Your comment'></textarea>
+                    <textarea onChange={(e) => {setComment(e.target.value)}} value={comment} className='w-[14rem] sm:w-[20rem] md:w-[24rem] lg:w-[24rem] xl:w-[31rem] rounded-md resize-none p-2 border-[1px] overflow-scroll' type='text' autocapitalize='sentences' autoCorrect='true' placeholder='Your comment'></textarea>
                     <Button type='submit' onClick={handleCommentSubmit} className='h-8'> Submit </Button>
                 </div>
+            }
+            {!session.data &&
+                <span className='italic mt-4'> Sign in to comment </span>
             }
         </section>
   )

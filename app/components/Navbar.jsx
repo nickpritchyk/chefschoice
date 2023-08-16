@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import CloseIcon from '@mui/icons-material/Close'
 import TableRowsIcon from '@mui/icons-material/TableRows'
@@ -14,6 +14,20 @@ function Navbar() {
 
   const [isOpen, setIsOpen] = useState(false)
   const [profileIsOpen, setProfileIsOpen] = useState(false)
+
+  function handleOutsideClick(e) {
+    if(refOne.current && !refOne.current.contains(e.target)) {
+        setProfileIsOpen(prev => !prev)
+    } else {
+        return
+    }
+  }
+
+  useEffect(() => {
+      document.addEventListener('click', handleOutsideClick, true)
+  }, [])
+
+  const refOne = useRef(null)
   
   return (
     <div className='w-full h-20 shadow-md fixed top-0 bg-white z-10'>
@@ -28,7 +42,7 @@ function Navbar() {
               ? <div className='flex flex-col'>
                   <button className='text-[rgb(255,143,58)] hover:animate-pulse' type='button' onClick={() => setProfileIsOpen(prev => !prev)}> {session.data?.user.name} </button>
                   {profileIsOpen && 
-                    <div className='flex flex-col w-36 bg-white shadow-lg p-4 items-start gap-4 border-[1px] rounded-md fixed top-[4rem] right-2'>
+                    <div ref={refOne} className='flex flex-col w-36 bg-white shadow-lg p-4 items-start gap-4 border-[1px] rounded-md fixed top-[4rem] right-2'>
                       <CloseIcon className='hover:animate-pulse hover:text-gray-600 cursor-pointer' onClick={() => setProfileIsOpen((prev) => (!prev))}> x </CloseIcon>
                       <Link className='navlinks' href='/myrecipes'> My Recipes </Link>
                       <button className='navlinks' onClick={() => signOut()}> Sign out </button>
@@ -53,7 +67,7 @@ function Navbar() {
               : <button className='flex hover:text-[#F99648]' type='button' onClick={() => signIn()}> Sign in </button>
               }
               {profileIsOpen && 
-                    <div className='flex flex-col ml-2 items-start gap-2'>
+                    <div ref={refOne} className='flex flex-col ml-2 items-start gap-2'>
                       <Link className='navlinks' href='/myrecipes'> My Recipes </Link>
                       <button className='navlinks' onClick={() => signOut()}> Sign out </button>
                     </div>
