@@ -34,7 +34,7 @@ export default function SingleRecipe({ singleRecipe, comments, recipeid, singleR
                     }
                 })
         }
-    }, [isFavorite])
+    }, [])
 
 
     async function handleFavorite(e, recipesid) {
@@ -52,6 +52,7 @@ export default function SingleRecipe({ singleRecipe, comments, recipeid, singleR
             if(!res.ok) {
                 throw new error('ERROR favorite post')
             } else {
+                setIsFavorite(true)
                 router.refresh()
                 return res.json()
             }
@@ -73,6 +74,7 @@ export default function SingleRecipe({ singleRecipe, comments, recipeid, singleR
             if(!res.ok) {
                 alert('ERROR deleting favorite')
             } else {
+                setIsFavorite(false)
                 router.refresh()
                 return res.json()
             }
