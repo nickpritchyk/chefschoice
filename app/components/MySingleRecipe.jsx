@@ -41,8 +41,8 @@ export default function MySingleRecipe({ singleRecipe, singleRecipeComments }) {
             {singleRecipe && 
                 <div className='w-full relative flex flex-col gap-12'>
                     <div className='flex gap-6 w-full border-b-[1px] border-black p-2'>
-                        <Link href={{ pathname: `/updaterecipe/${singleRecipe.recipeid}`, query: { id:  singleRecipe.recipeid} }}> Edit </Link>
-                        <button className="" onClick={() => {handleDelete(singleRecipe.recipeid, singleRecipe.imgkey)}}> Delete </button>
+                        <Link style={{color: 'white', backgroundColor: '#F99648', borderRadius: '6px', padding: '6px', border: '0.2px solid black'}} href={{ pathname: `/updaterecipe/${singleRecipe.recipeid}`, query: { id:  singleRecipe.recipeid} }}> Edit </Link>
+                        <button className="text-white rounded-md p-[6px] bg-primary border-black border-[0.2px]" onClick={() => {handleDelete(singleRecipe.recipeid, singleRecipe.imgkey)}}> Delete </button>
                     </div>
                     <section className='w-full flex flex-col gap-8'>
                         <h1 className='text-3xl font-bold'> {singleRecipe.name} </h1>
@@ -62,7 +62,7 @@ export default function MySingleRecipe({ singleRecipe, singleRecipeComments }) {
                         <ExpandMoreIcon onClick={() => {isCommentsOpen()}} style={{fontSize: '32px', cursor: 'pointer'}}/>
                     </div>
                     {commentsOpen && 
-                        <Comments recipeid={singleRecipe.recipeid} singleRecipeComments={singleRecipeComments} isMyRecipe={true}/>
+                        <Comments recipeid={singleRecipe.recipeid} singleRecipeComments={singleRecipeComments} />
 
                     }
                 </div>

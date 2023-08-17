@@ -8,7 +8,7 @@ import StarIcon from '@mui/icons-material/Star';
 import Rating from '@mui/material/Rating';
 import EditModal from '../components/EditModal'
 
-function Comments({ recipeid, singleRecipeComments, isMyRecipe }) {
+function Comments({ recipeid, singleRecipeComments }) {
     const router = useRouter()
     const session = useSession();
 
@@ -115,7 +115,7 @@ function Comments({ recipeid, singleRecipeComments, isMyRecipe }) {
                         <p> No comments </p>
                 }
             </div>
-            {(!isMyRecipe && session.data) &&
+            {(session.data) &&
                 <div className='flex flex-col gap-4 mt-6'>
                     <h2 className='font-extrabold'> Leave a comment </h2>
                     <label> Rating </label>

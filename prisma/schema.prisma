@@ -8,18 +8,19 @@ datasource db {
 }
 
 model recipebook {
-  recipeid     Int        @id @default(autoincrement())
-  name         String     @db.VarChar(45)
-  description  String     @db.VarChar(45)
+  recipeid     Int         @id @default(autoincrement())
+  name         String      @db.VarChar(45)
+  description  String      @db.VarChar(45)
   ingredients  Json
   cooktime     Int
-  instructions String     @db.MediumText
-  imgurl       String?    @db.VarChar(200)
-  imgkey       String?    @db.VarChar(200)
-  author       String     @db.VarChar(45)
+  instructions String      @db.MediumText
+  imgurl       String?     @db.VarChar(200)
+  imgkey       String?     @db.VarChar(200)
+  author       String      @db.VarChar(45)
   userid       Int
   comments     comments[]
-  users        users      @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "userid")
+  favorites    favorites[]
+  users        users       @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "userid")
 
   @@index([userid], map: "userid_idx")
 }
@@ -29,6 +30,7 @@ model users {
   username   String       @unique(map: "username_UNIQUE") @db.VarChar(45)
   password   String       @db.VarChar(100)
   comments   comments[]
+  favorites  favorites[]
   recipebook recipebook[]
 }
 
@@ -44,4 +46,15 @@ model comments {
 
   @@index([authorid], map: "authorid_idx")
   @@index([recipeid], map: "comments_ibfk_1")
+}
+
+model favorites {
+  favoriteid Int        @id @default(autoincrement())
+  recipesid  Int
+  usersid    Int
+  recipebook recipebook @relation(fields: [recipesid], references: [recipeid], onDelete: NoAction, onUpdate: NoAction, map: "favorites_ibfk_1")
+  users      users      @relation(fields: [usersid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "usersid")
+
+  @@index([recipesid], map: "recipesid")
+  @@index([usersid], map: "usersid_idx")
 }

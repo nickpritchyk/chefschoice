@@ -2,13 +2,15 @@
 
 import Link from 'next/link';
 import StarIcon from '@mui/icons-material/Star';
+import { useSession } from 'next-auth/react';
+
 
 
 function Recipes({ recipes }) {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center justify-items-center p-8"> 
-        {recipes.map((res, key) => 
+        {recipes.map((res) => 
             
             <div key={res.id} className="w-[21rem] xl:w-[22rem] p-6 gap-8 hover:scale-[1.01]">
                 <div className="w-full h-full bg-gray-300 rounded-md hover:shadow-xl shadow-lg">

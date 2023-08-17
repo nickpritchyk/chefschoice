@@ -1,12 +1,83 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Comments from '../components/Comments'
 import StarIcon from '@mui/icons-material/Star';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function SingleRecipe({ singleRecipe, comments, recipeid, singleRecipeComments }) {
     const [commentsOpen, setCommentsOpen] = useState(false)
+    const [isFavorite, setIsFavorite] = useState(false)
+    const router = useRouter()
+    const session = useSession()
+
+
+    useEffect(() => {
+        if(session.data) {
+            fetch('/api/favorite/isfavorited', {
+                method: 'POST',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify({
+                    recipesid: recipeid,
+                    usersid: session?.data?.userid
+                })
+            }).then(res => res.json())
+                .then(res => {
+                    if(res.isFavorited) {
+                        setIsFavorite(true)
+                    } else {
+                        return res
+                    }
+                })
+        }
+    }, [isFavorite])
+
+
+    async function handleFavorite(e, recipesid) {
+        e.preventDefault()
+        await fetch('/api/favorite', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+              },
+              body: JSON.stringify({
+                recipesid: recipesid,
+                usersid: session.data?.userid
+              })
+        }).then(res => {
+            if(!res.ok) {
+                throw new error('ERROR favorite post')
+            } else {
+                router.refresh()
+                return res.json()
+            }
+         })
+    }
+
+    async function handleDeleteFavorite(e, recipesid) {
+        e.preventDefault()
+        await fetch('/api/favorite/delete', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+              },
+              body: JSON.stringify({
+                recipesid: recipesid,
+                usersid: session.data?.userid
+              })
+        }).then(res => {
+            if(!res.ok) {
+                alert('ERROR deleting favorite')
+            } else {
+                router.refresh()
+                return res.json()
+            }
+         })
+    }
 
     function isCommentsOpen() {
         setCommentsOpen((prev) => !prev)
@@ -15,11 +86,17 @@ export default function SingleRecipe({ singleRecipe, comments, recipeid, singleR
     return (
         <div className='w-[90vw] sm:w-[75vw] md:w-[65vw] lg:w-[45vw] h-fit p-16 flex m-8 shadow-md hover:shadow-lg'>
             {singleRecipe && 
-                <div className='w-full relative flex flex-col gap-12'>
-                    <button className='mr-auto flex gap-2'>
-                        Favorite
-                        <StarIcon style={{color: '#F99648'}}/>
-                    </button>
+                <div className='w-full relative flex flex-col gap-8'>
+                    {!isFavorite ?
+                        <button onClick={(e) => handleFavorite(e, singleRecipe.recipeid)} className='mr-auto flex bg-primary p-2 text-white rounded-md'>
+                            Favorite
+                            <StarIcon style={{color: 'white'}}/>
+                        </button>
+                        :
+                        <button onClick={(e) => handleDeleteFavorite(e, singleRecipe.recipeid)} className='mr-auto flex bg-primary p-2 text-white rounded-md'>
+                            Remove Favorite
+                        </button>
+                    }
                     <section className='w-full flex flex-col gap-8'>
                         <h1 className='text-3xl font-bold'> {singleRecipe.name} </h1>
                         <h2 className='text-2xl font-bold border-b-2 border-primary pb-2'> by {singleRecipe.author} </h2>
@@ -27,8 +104,8 @@ export default function SingleRecipe({ singleRecipe, comments, recipeid, singleR
                         <p className='font-semibold'> {singleRecipe.description} </p>
                         <label className='font-extrabold text-xl'> Ingredients </label>
                         <section className='w-fit rounded-md flex flex-col gap-4'>
-                            {((singleRecipe.ingredients).slice(1, -1)).split(',').map((ing) => 
-                                <p>{(ing).slice(1, -1)}</p>
+                            {((singleRecipe.ingredients).slice(1, -1)).split(',').map((ing, idx) => 
+                                <p key={idx}>{(ing).slice(1, -1)}</p>
                             )}
                         </section>
                         <h2 className='font-extrabold text-xl'> Instructions </h2>

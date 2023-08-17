@@ -60,7 +60,6 @@ function EditRecipe({ recipes }) {
     setSuccessIcon(true)
     router.push('/myrecipes')
     toast('Recipe Updated', { hideProgressBar: true, autoClose: 3000, type: 'success' })
-
   }
 
   const handleIngredientClick = () => {
