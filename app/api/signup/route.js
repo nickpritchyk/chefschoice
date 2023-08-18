@@ -4,7 +4,7 @@ import { hash } from 'bcrypt';
 
 const { PrismaClient } = require('@prisma/client')
 
-export const prisma = new PrismaClient()
+const prisma = new PrismaClient()
 prisma.$use(fieldEncryptionMiddleware())
 
 export async function POST(req, res) {
