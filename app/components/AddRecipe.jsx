@@ -143,7 +143,7 @@ function AddRecipe() {
         </ul>
         }
         <label> Instructions </label>
-        {/* <ReactQuill className='flex flex-col' type='button' placeholder='Instructions' value={instructions} onChange={setInstructions} required></ReactQuill>  */}
+        <ReactQuill className='flex flex-col' type='button' placeholder='Instructions' value={instructions} onChange={setInstructions} required></ReactQuill> 
         <label className='font-extrabold'> Image </label>
         <p className='text-xs text-gray-700'> Add the wrong image to the dropzone? Simply choose another file. </p>
         <div className='flex flex-col'>
