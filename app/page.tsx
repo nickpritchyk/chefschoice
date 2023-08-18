@@ -7,13 +7,17 @@ const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-export default function Home() {
+
+
+export default async function Home() {
+
+  const recipes = await prisma.recipebook.findMany()
 
   return (
     <div className='flex h-full w-full bg-cover bg-center bg-[url("assets/header1.png")]'>
       <div className='grow'>
         <section className='flex flex-col items-center h-full bg-cover'>
-          <Searchbar />
+          <Searchbar recipes={recipes}/>
         </section>
         <section className='h-full bg-cover bg-center bg-[url("assets/header2.png")]'>
           <h1 className='border-solid'></h1>

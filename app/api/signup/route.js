@@ -7,7 +7,7 @@ const { PrismaClient } = require('@prisma/client')
 export const prisma = new PrismaClient()
 prisma.$use(fieldEncryptionMiddleware())
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req, res) {
     const data = await req.json()
     const password = await hash(data.password, 12)
     const notUnique = await prisma.users.findUnique({
