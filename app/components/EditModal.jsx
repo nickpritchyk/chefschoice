@@ -63,7 +63,7 @@ function EditModal({setEditIsOpen, currRating, currComment, commentid}) {
                 }}
             />
             <textarea onChange={(e) => {setNewComment(e.target.value)}} defaultValue={currComment} className='w-[14rem] sm:w-[20rem] md:w-[24rem] lg:w-[24rem] xl:w-[31rem] rounded-md resize-none p-2 border-[1px] border-primary overflow-scroll' placeholder='Your comment'></textarea>
-            <Button classname='' type='submit' onClick={handleCommentSubmit} className='h-8'> Submit </Button>
+            <Button type='submit' onClick={handleCommentSubmit} className='h-8'> Submit </Button>
         </div>
     </div>
   )

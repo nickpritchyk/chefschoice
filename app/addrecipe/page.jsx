@@ -1,6 +1,6 @@
 import AddRecipe from '../components/AddRecipe'
 
-function addRecipe() {
+function addrecipe() {
   return (
     <div className='w-screen h-screen m-12'>
         <AddRecipe />
@@ -8,4 +8,4 @@ function addRecipe() {
   )
 }
 
-export default addRecipe
+export default addrecipe
