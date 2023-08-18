@@ -5,6 +5,8 @@ import MyRecipeDeck from '../components/MyRecipeDeck'
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
+export const revalidate = 0;
+
 async function myrecipes() {
   const session = await getServerSession(options)
 
