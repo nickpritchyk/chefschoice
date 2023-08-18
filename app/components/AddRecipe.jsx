@@ -151,7 +151,6 @@ function AddRecipe() {
             <UploadDropzone className='bg-red-400' endpoint="imageUploader"
               onClientUploadComplete={(res) => {
                 // Do something with the response
-                console.log('file upload thing: ', res)
                 setImgURL(res[0])
                 toast('Upload Successfull', { hideProgressBar: true, autoClose: 2000, type: 'success' })
               }}
