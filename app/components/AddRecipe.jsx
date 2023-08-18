@@ -10,11 +10,12 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { toast } from "react-toastify";
 import 'react-quill/dist/quill.snow.css';
 import { UploadDropzone } from '../components/uploadthing';
-import ReactQuill from 'react-quill';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+const ReactQuill = typeof window === 'object' ? require('react-quill') : () => false;
 
 function AddRecipe() {
+
   const router = useRouter()
   const session = useSession();
   const [userid, setUserid] = useState()
