@@ -24,6 +24,8 @@ export async function POST(req, res) {
             data: {
                 username: data.username,
                 password: password,
+                question: parseInt(data.securityQuestion),
+                answer: data.answer
             }
         })
         return new Response(JSON.stringify('Account successfully created'))

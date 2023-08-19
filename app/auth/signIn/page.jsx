@@ -67,7 +67,7 @@ function LoginPage() {
                     <Link className='hover:underline' href='/signup'>
                         Don't have an account? Sign up here.
                     </Link>
-                    <Link className='mt-2 hover:underline' href='/'>
+                    <Link className='mt-2 hover:underline' href='/passwordreset'>
                         Forgot your password?
                     </Link>
                 </div>

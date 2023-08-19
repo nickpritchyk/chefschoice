@@ -1,6 +1,4 @@
-import Image from 'next/image'
-import header1 from './assets/header1.png'
-import Autocomplete from '@mui/material/Autocomplete'
+import Recipes from './components/Recipes.jsx'
 import Searchbar from './components/Searchbar.jsx'
 
 const { PrismaClient } = require('@prisma/client')
@@ -10,7 +8,6 @@ const prisma = new PrismaClient()
 
 
 export default async function Home() {
-
   const recipes = await prisma.recipebook.findMany()
 
   return (

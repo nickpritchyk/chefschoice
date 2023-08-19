@@ -9,52 +9,54 @@ datasource db {
 
 model recipebook {
   recipeid     Int         @id @default(autoincrement())
-  name         String      @db.VarChar(45)
-  description  String      @db.VarChar(45)
-  ingredients  Json
-  cooktime     Int
-  instructions String      @db.MediumText
+  name         String?     @db.VarChar(45)
+  description  String?     @db.VarChar(45)
+  ingredients  Json?
+  cooktime     Int?
+  instructions String?     @db.MediumText
   imgurl       String?     @db.VarChar(200)
   imgkey       String?     @db.VarChar(200)
-  author       String      @db.VarChar(45)
-  userid       Int
+  author       String?     @db.VarChar(45)
+  userid       Int?
   comments     comments[]
   favorites    favorites[]
-  users        users       @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "userid")
+  users        users?      @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "userid")
 
   @@index([userid], map: "userid_idx")
 }
 
 model users {
   userid     Int          @id @default(autoincrement())
-  username   String       @unique(map: "username_UNIQUE") @db.VarChar(45)
-  password   String       @db.VarChar(100)
+  username   String?      @unique(map: "username") @db.VarChar(45)
+  password   String?      @db.VarChar(100)
+  question   Int?
+  answer     String?      @db.VarChar(45)
   comments   comments[]
   favorites  favorites[]
   recipebook recipebook[]
 }
 
 model comments {
-  id         Int        @id @default(autoincrement())
-  rating     Int
-  comment    String     @db.VarChar(280)
-  recipeid   Int
-  author     String     @db.VarChar(45)
-  authorid   Int
-  users      users      @relation(fields: [authorid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "authorid")
-  recipebook recipebook @relation(fields: [recipeid], references: [recipeid], onDelete: Cascade, onUpdate: NoAction, map: "comments_ibfk_1")
+  id         Int         @id @default(autoincrement())
+  rating     Int?
+  comment    String?     @db.VarChar(280)
+  recipeid   Int?
+  author     String?     @db.VarChar(45)
+  authorid   Int?
+  users      users?      @relation(fields: [authorid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "authorid")
+  recipebook recipebook? @relation(fields: [recipeid], references: [recipeid], onDelete: Cascade, onUpdate: NoAction, map: "comments_ibfk_1")
 
   @@index([authorid], map: "authorid_idx")
-  @@index([recipeid], map: "comments_ibfk_1")
+  @@index([recipeid], map: "recipeid_fk")
 }
 
 model favorites {
-  favoriteid Int        @id @default(autoincrement())
-  recipesid  Int
-  usersid    Int
-  recipebook recipebook @relation(fields: [recipesid], references: [recipeid], onDelete: NoAction, onUpdate: NoAction, map: "favorites_ibfk_1")
-  users      users      @relation(fields: [usersid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "usersid")
+  favoriteid Int         @id @default(autoincrement())
+  recipesid  Int?
+  usersid    Int?
+  recipebook recipebook? @relation(fields: [recipesid], references: [recipeid], onDelete: NoAction, onUpdate: NoAction, map: "favorites_ibfk_1")
+  users      users?      @relation(fields: [usersid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "usersid")
 
-  @@index([recipesid], map: "recipesid")
-  @@index([usersid], map: "usersid_idx")
+  @@index([recipesid], map: "recipesid_fk")
+  @@index([usersid], map: "usersid_fk")
 }

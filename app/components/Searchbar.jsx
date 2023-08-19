@@ -1,17 +1,22 @@
 'use client';
 
-import React, { useState } from 'react'
-import Autocomplete from '@mui/material/Autocomplete'
-import { TextField } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import Recipes from './Recipes';
 
 
 export default function Searchbar({ recipes }) {
   const [searchInput, setSearchInput] = useState('')
+  const [filteredRecipes, setFilteredRecipes] = useState(recipes)
+
+  useEffect(() => {
+    setFilteredRecipes(recipes.filter(recipe => ((recipe.name).toLowerCase()).includes(searchInput) ))
+  }, [searchInput])
 
   return (
-    <div className='w-[50%] h-fit mt-24'>
+    <div className='w-full h-fit mt-24 flex flex-col justify-center items-center'>
         <h1 className='text-[52px] text-white'> Discover Recipes </h1>
-        <Autocomplete onInputChange={(e) => setSearchInput(e.target.value)} style={{backgroundColor: 'white'}} options={['emptyArr']} renderInput={(params) => <TextField {...params} label="Find recipes.." variant="filled" />} />
+        <input onChange={(e) => setSearchInput((e.target.value).toLowerCase())} className='w-[40%] h-[2.2rem] shadow-md border-black border-[0.5px] rounded-md p-2' placeholder='Search for recipes'></input>
+        <Recipes recipes={filteredRecipes}/>
     </div>
   )
 }
