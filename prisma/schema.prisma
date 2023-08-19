@@ -54,7 +54,7 @@ model favorites {
   favoriteid Int         @id @default(autoincrement())
   recipesid  Int?
   usersid    Int?
-  recipebook recipebook? @relation(fields: [recipesid], references: [recipeid], onDelete: NoAction, onUpdate: NoAction, map: "favorites_ibfk_1")
+  recipebook recipebook? @relation(fields: [recipesid], references: [recipeid], onDelete: Cascade, onUpdate: NoAction, map: "favorites_ibfk_1")
   users      users?      @relation(fields: [usersid], references: [userid], onDelete: NoAction, onUpdate: NoAction, map: "usersid")
 
   @@index([recipesid], map: "recipesid_fk")
