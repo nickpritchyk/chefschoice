@@ -53,9 +53,11 @@ export default function MyRecipeDeck({ recipes }) {
                     
                     <div key={res.recipeid} className="w-[21rem] xl:w-[22rem] p-6 gap-8 hover:scale-[1.01]">
                         <div className="w-full h-full bg-gray-300 hover:shadow-xl shadow-lg border-[0.5px] border-primary">
-                            <Link href={{ pathname: `/myrecipes/${res.recipeid}`, query: { name: res.name}} } className="w-full">
-                                <img className="h-[15rem] w-full" src={res.imgurl} alt='img' />
-                            </Link>
+                            <div className="h-[15rem]">
+                                <Link href={{ pathname: `/myrecipes/${res.recipeid}`, query: { name: res.name}} } className="w-full h-full">
+                                    <img className="object-cover w-full h-full" src={res.imgurl} alt='img' />
+                                </Link>
+                            </div>
                             <div className="h-[7rem] relative gap-4 bg-white opacity-70 w-full">
                                 <h5 className="absolute text-lg font-extrabold tracking-tight p-2">{res.name}</h5>
                                 <div className="bottom-2 absolute flex gap-4 items-center w-full p-2">
