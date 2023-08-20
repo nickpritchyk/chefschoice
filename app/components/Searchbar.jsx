@@ -13,9 +13,9 @@ export default function Searchbar({ recipes }) {
   }, [searchInput])
 
   return (
-    <div className='w-full h-fit mt-24 flex flex-col justify-center items-center'>
-        <h1 className='text-[52px] text-white'> Discover Recipes </h1>
-        <input onChange={(e) => setSearchInput((e.target.value).toLowerCase())} className='w-[40%] h-[2.2rem] shadow-md border-black border-[0.5px] rounded-md p-2' placeholder='Search for recipes'></input>
+    <div className='w-full h-fit mt-8 flex flex-col justify-center items-center'>
+        <h1 className='text-[28px] text-primary'> Discover Recipes </h1>
+        <input onChange={(e) => setSearchInput((e.target.value).toLowerCase())} className='w-[40%] h-[2.2rem] shadow-md border-black border-[0.5px] rounded-md p-2' placeholder='Enter a recipe'></input>
         <Recipes recipes={filteredRecipes}/>
     </div>
   )

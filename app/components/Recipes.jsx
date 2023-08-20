@@ -13,7 +13,7 @@ function Recipes({ recipes }) {
         {recipes.map((res) => 
             
             <div key={res.id} className="w-[21rem] xl:w-[22rem] p-6 gap-8 hover:scale-[1.01]">
-                <div className="w-full h-full bg-gray-300 rounded-md hover:shadow-xl shadow-lg">
+                <div className="w-full h-full bg-gray-300 hover:shadow-xl shadow-lg border-[0.5px] border-primary">
                     <div className="h-[15rem]">
                         <Link href={{ pathname: `/recipedeck/${res.recipeid}`, query: { name: res.name}} } className="w-full h-full">
                             <img className="object-cover h-full w-full" src={res.imgurl} alt='img' />

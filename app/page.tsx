@@ -7,18 +7,14 @@ const prisma = new PrismaClient()
 
 
 
-export default async function Home() {
-  const recipes = await prisma.recipebook.findMany()
+export default function Home() {
 
   return (
-    <div className='flex h-full w-full bg-cover bg-center bg-[url("assets/header1.png")]'>
-      <div className='grow'>
-        <section className='flex flex-col items-center h-full bg-cover'>
-          <Searchbar recipes={recipes}/>
-        </section>
-        <section className='h-full bg-cover bg-center bg-[url("assets/header2.png")]'>
-          <h1 className='border-solid'></h1>
-        </section>
+    <div className='flex flex-col h-full w-full bg-center bg-[url("assets/header1.png")] bg-cover'>
+      <div className='flex flex-col items-center justify-center h-full w-full'>
+        <h1 className='flex text-5xl text-white mb-52'>
+          Find your favorite recipes here!
+        </h1>
       </div>
     </div>
   )

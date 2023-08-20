@@ -8,6 +8,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { nerve } from '../fonts'
+
 
 function SignupForm() {
   const Router = useRouter();
@@ -44,8 +46,11 @@ function SignupForm() {
   }
 
   return (
-      <div className="w-[85%] sm:w-auto h-auto p-12 bg-white shadow-lg rounded-md">
+      <div className="w-[85%] sm:w-auto h-auto p-12 bg-white shadow-lg rounded-md border-2 border-primary">
         <div className="w-full max-w-xs">
+          <div className='text-5xl flex mb-6 place-self-center justify-center'>
+            <h1 className={nerve.className}> Sign Up </h1>
+          </div>
           <form onSubmit={handleSubmit} className="px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" type="username">
