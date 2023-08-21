@@ -6,6 +6,7 @@ import Comments from '../components/Comments'
 import StarIcon from '@mui/icons-material/Star';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function SingleRecipe({ singleRecipe, comments, recipeid, singleRecipeComments }) {
     const [commentsOpen, setCommentsOpen] = useState(false)
@@ -101,7 +102,9 @@ export default function SingleRecipe({ singleRecipe, comments, recipeid, singleR
                     }
                     <section className='w-full flex flex-col gap-8'>
                         <h1 className='text-3xl font-bold'> {singleRecipe.name} </h1>
-                        <h2 className='text-2xl font-bold border-b-2 border-primary pb-2'> by {singleRecipe.author} </h2>
+                        <Link href={{ pathname: `/userprofile/${singleRecipe.author}`, query: { name: singleRecipe.userid}} }>
+                            <h2 className='text-2xl font-bold border-b-2 border-primary pb-2 text-primary'> by {singleRecipe.author} </h2>
+                        </Link>
                         <img src={singleRecipe.imgurl}></img>
                         <p className='font-semibold'> {singleRecipe.description} </p>
                         <label className='font-extrabold text-xl'> Ingredients </label>
