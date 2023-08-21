@@ -90,15 +90,19 @@ export default function SingleRecipe({ singleRecipe, comments, recipeid, singleR
         <div className='w-[90vw] sm:w-[75vw] md:w-[65vw] lg:w-[45vw] h-fit p-16 flex m-8 shadow-md hover:shadow-lg'>
             {singleRecipe && 
                 <div className='w-full relative flex flex-col gap-8'>
-                    {!isFavorite ?
-                        <button onClick={(e) => handleFavorite(e, singleRecipe.recipeid)} className='mr-auto flex bg-primary p-2 text-white rounded-md'>
-                            Favorite
-                            <StarIcon style={{color: 'white'}}/>
-                        </button>
-                        :
-                        <button onClick={(e) => handleDeleteFavorite(e, singleRecipe.recipeid)} className='mr-auto flex bg-primary p-2 text-white rounded-md'>
-                            Remove Favorite
-                        </button>
+                    {(session.data) && 
+                        <div>
+                        {!isFavorite ?
+                            <button onClick={(e) => handleFavorite(e, singleRecipe.recipeid)} className='mr-auto flex bg-primary p-2 text-white rounded-md'>
+                                Favorite
+                                <StarIcon style={{color: 'white'}}/>
+                            </button>
+                            :
+                            <button onClick={(e) => handleDeleteFavorite(e, singleRecipe.recipeid)} className='mr-auto flex bg-primary p-2 text-white rounded-md'>
+                                Remove Favorite
+                            </button>
+                        }
+                        </div>
                     }
                     <section className='w-full flex flex-col gap-8'>
                         <h1 className='text-3xl font-bold'> {singleRecipe.name} </h1>
