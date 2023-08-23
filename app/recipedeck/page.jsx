@@ -11,19 +11,11 @@ async function recipedeck() {
         include: {
             comments: {
               select: {
-                rating: true,
+                  rating: true
+                },
               },
-            },
           },
     })
-    console.log(recipes)
-
-    const groupRating = await prisma.comments.groupBy({
-        by: ['recipeid'],
-        _sum: {
-            rating: true,
-          },
-      })
 
 
     return (

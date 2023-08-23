@@ -16,6 +16,7 @@ model recipebook {
   instructions String?     @db.MediumText
   imgurl       String?     @db.VarChar(200)
   imgkey       String?     @db.VarChar(200)
+  date         DateTime?   @default(dbgenerated("(curdate())")) @db.Date
   author       String?     @db.VarChar(45)
   userid       Int?
   comments     comments[]
