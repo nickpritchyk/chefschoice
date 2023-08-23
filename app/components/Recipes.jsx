@@ -5,9 +5,6 @@ import StarIcon from '@mui/icons-material/Star';
 
 function Recipes({ recipes }) {
 
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center justify-items-center p-8"> 
         {recipes.map((res) => 
