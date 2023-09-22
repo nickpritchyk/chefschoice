@@ -1,34 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Chefs Choice
 
-## Getting Started
+# An online recipe search and post site made with NextJS 13
 
-First, run the development server:
+# https://chefschoice.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+# Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+NextJS 13
+MySQL + Prisma
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Hosted on Vercel, MySQL backend using Microsoft Azure
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Features
+- User Authentication with NextAuth
+- Recipe Search
+- Recipe Creation
+- Recipe commenting + rating + favorites
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+<img width="1800" alt="Screenshot 2023-09-02 at 4 01 44 PM" src="https://github.com/nickpritchyk/chefschoice/assets/62455273/4e418026-f409-4acb-8817-bebae3e01ef3">
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<img width="1788" alt="Screenshot 2023-09-02 at 4 02 05 PM" src="https://github.com/nickpritchyk/chefschoice/assets/62455273/f5fa2a8f-69a0-41a2-9c3c-38b18b1f0bcd">
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<img width="1758" alt="Screenshot 2023-09-02 at 4 02 17 PM" src="https://github.com/nickpritchyk/chefschoice/assets/62455273/be0a5adb-2ff2-46be-a818-fcab16e47e45">
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<img width="492" alt="Screenshot 2023-09-02 at 4 02 41 PM" src="https://github.com/nickpritchyk/chefschoice/assets/62455273/d4ed2999-2f7d-4592-b49a-13cb02ba5b5a">
