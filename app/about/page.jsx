@@ -7,7 +7,7 @@ import MailIcon from '@mui/icons-material/Mail';
 function About() {
   return (
     <div className='w-full flex flex-col items-center mt-24 text-center'>
-      <div className='w-[50%] flex flex-col gap-12 place-items-center shadow-xl p-12 rounded-md border-primary border-[0.5px]'>
+      <div className='w-[80%] sm:w-[50%] flex flex-col gap-12 place-items-center shadow-xl p-12 rounded-md border-primary mb-12 border-[0.5px]'>
         <h1 className='text-4xl border-b-2 p-2 border-primary'> Chefs Choice </h1>
         <h3 className='text-3xl'> made by Nicholas Pritchyk </h3>
         <div className='flex gap-6'>
@@ -28,7 +28,7 @@ function About() {
           <h2 className='text-xl'>
             How was this site built?
           </h2>
-          <ul className='flex gap-6 p-2 select-none'>
+          <ul className='flex sm:flex-row flex-col gap-6 p-2 select-none'>
             <li className='bg-primary p-2 rounded-md text-white'> NextJS 13 </li>
             <li className='bg-primary p-2 rounded-md text-white'> TailwindCSS </li>
             <li className='bg-primary p-2 rounded-md text-white'> MySQL + Prisma </li>

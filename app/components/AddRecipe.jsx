@@ -87,6 +87,14 @@ function AddRecipe() {
     }
   }
 
+  function restrictComma(e){
+    if(e.keyCode === 44){
+        return false;
+    }else{
+        return true;
+    }
+}
+
   const sendRecipe = async (e) => {
     e.preventDefault();
     if(title && ingredientsArr && instructions && description && cookTime && userid && author && imgURL) {
@@ -130,7 +138,7 @@ function AddRecipe() {
         <input className='border-[0.5px] border-black p-1 shadow-sm' placeholder='ex. 60' type='number' onChange={(e) => setCookTime(e.target.value)} onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()} required></input>
         <label className='font-extrabold'> Ingredients </label>
         <div className='flex relative items-center'>
-          <input className='border-[0.5px] border-black p-1 shadow-sm w-full' placeholder='ex. 1lb chicken' value={ingredients} onChange={(e) => setIngredients(e.target.value)}></input>
+          <input className='border-[0.5px] border-black p-1 shadow-sm w-full' placeholder='ex. 1lb chicken' value={ingredients} onChange={(e) => setIngredients(e.target.value)} ></input>
           <button className='flex bg-[#F99648] hover:bg-[#ecb97a] rounded-md absolute right-1' type='button' onClick={handleIngredientClick}><AddIcon /></button>
         </div>
         {ingredientsArr.length > 0 &&
